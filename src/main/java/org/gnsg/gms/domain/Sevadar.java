@@ -1,6 +1,5 @@
 package org.gnsg.gms.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.Cache;
@@ -12,6 +11,8 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
 import java.util.Objects;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * The Employee entity.
@@ -51,9 +52,9 @@ public class Sevadar implements Serializable {
     @Column(name = "is_valid")
     private Boolean isValid;
 
-    @ManyToOne
-    @JsonIgnoreProperties("sevadars")
-    private Program program;
+    @OneToMany(mappedBy = "sevadar")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Program> programs = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -142,17 +143,29 @@ public class Sevadar implements Serializable {
         this.isValid = isValid;
     }
 
-    public Program getProgram() {
-        return program;
+    public Set<Program> getPrograms() {
+        return programs;
     }
 
-    public Sevadar program(Program program) {
-        this.program = program;
+    public Sevadar programs(Set<Program> programs) {
+        this.programs = programs;
         return this;
     }
 
-    public void setProgram(Program program) {
-        this.program = program;
+    public Sevadar addProgram(Program program) {
+        this.programs.add(program);
+        program.setSevadar(this);
+        return this;
+    }
+
+    public Sevadar removeProgram(Program program) {
+        this.programs.remove(program);
+        program.setSevadar(null);
+        return this;
+    }
+
+    public void setPrograms(Set<Program> programs) {
+        this.programs = programs;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

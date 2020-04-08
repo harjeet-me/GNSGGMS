@@ -9,8 +9,6 @@ import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 
 import { ISevadar, Sevadar } from 'app/shared/model/sevadar.model';
 import { SevadarService } from './sevadar.service';
-import { IProgram } from 'app/shared/model/program.model';
-import { ProgramService } from 'app/entities/program/program.service';
 
 @Component({
   selector: 'jhi-sevadar-update',
@@ -18,7 +16,6 @@ import { ProgramService } from 'app/entities/program/program.service';
 })
 export class SevadarUpdateComponent implements OnInit {
   isSaving = false;
-  programs: IProgram[] = [];
 
   editForm = this.fb.group({
     id: [],
@@ -27,16 +24,10 @@ export class SevadarUpdateComponent implements OnInit {
     phoneNumber: [],
     sevaStartDate: [],
     sevaEndDate: [],
-    isValid: [],
-    program: []
+    isValid: []
   });
 
-  constructor(
-    protected sevadarService: SevadarService,
-    protected programService: ProgramService,
-    protected activatedRoute: ActivatedRoute,
-    private fb: FormBuilder
-  ) {}
+  constructor(protected sevadarService: SevadarService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ sevadar }) => {
@@ -47,8 +38,6 @@ export class SevadarUpdateComponent implements OnInit {
       }
 
       this.updateForm(sevadar);
-
-      this.programService.query().subscribe((res: HttpResponse<IProgram[]>) => (this.programs = res.body || []));
     });
   }
 
@@ -60,8 +49,7 @@ export class SevadarUpdateComponent implements OnInit {
       phoneNumber: sevadar.phoneNumber,
       sevaStartDate: sevadar.sevaStartDate ? sevadar.sevaStartDate.format(DATE_TIME_FORMAT) : null,
       sevaEndDate: sevadar.sevaEndDate ? sevadar.sevaEndDate.format(DATE_TIME_FORMAT) : null,
-      isValid: sevadar.isValid,
-      program: sevadar.program
+      isValid: sevadar.isValid
     });
   }
 
@@ -92,8 +80,7 @@ export class SevadarUpdateComponent implements OnInit {
       sevaEndDate: this.editForm.get(['sevaEndDate'])!.value
         ? moment(this.editForm.get(['sevaEndDate'])!.value, DATE_TIME_FORMAT)
         : undefined,
-      isValid: this.editForm.get(['isValid'])!.value,
-      program: this.editForm.get(['program'])!.value
+      isValid: this.editForm.get(['isValid'])!.value
     };
   }
 
@@ -111,9 +98,5 @@ export class SevadarUpdateComponent implements OnInit {
 
   protected onSaveError(): void {
     this.isSaving = false;
-  }
-
-  trackById(index: number, item: IProgram): any {
-    return item.id;
   }
 }

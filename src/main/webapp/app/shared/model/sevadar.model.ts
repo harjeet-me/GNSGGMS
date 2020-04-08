@@ -9,7 +9,7 @@ export interface ISevadar {
   sevaStartDate?: Moment;
   sevaEndDate?: Moment;
   isValid?: boolean;
-  program?: IProgram;
+  programs?: IProgram[];
 }
 
 export class Sevadar implements ISevadar {
@@ -21,7 +21,7 @@ export class Sevadar implements ISevadar {
     public sevaStartDate?: Moment,
     public sevaEndDate?: Moment,
     public isValid?: boolean,
-    public program?: IProgram
+    public programs?: IProgram[]
   ) {
     this.isValid = this.isValid || false;
   }

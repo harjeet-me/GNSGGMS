@@ -9,6 +9,8 @@ import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 
 import { IProgram, Program } from 'app/shared/model/program.model';
 import { ProgramService } from './program.service';
+import { ISevadar } from 'app/shared/model/sevadar.model';
+import { SevadarService } from 'app/entities/sevadar/sevadar.service';
 
 @Component({
   selector: 'jhi-program-update',
@@ -16,6 +18,7 @@ import { ProgramService } from './program.service';
 })
 export class ProgramUpdateComponent implements OnInit {
   isSaving = false;
+  sevadars: ISevadar[] = [];
 
   editForm = this.fb.group({
     id: [],
@@ -34,10 +37,16 @@ export class ProgramUpdateComponent implements OnInit {
     recieptNumber: [],
     remark: [],
     bookingDate: [],
-    status: []
+    status: [],
+    sevadar: []
   });
 
-  constructor(protected programService: ProgramService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
+  constructor(
+    protected programService: ProgramService,
+    protected sevadarService: SevadarService,
+    protected activatedRoute: ActivatedRoute,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ program }) => {
@@ -49,6 +58,8 @@ export class ProgramUpdateComponent implements OnInit {
       }
 
       this.updateForm(program);
+
+      this.sevadarService.query().subscribe((res: HttpResponse<ISevadar[]>) => (this.sevadars = res.body || []));
     });
   }
 
@@ -70,7 +81,8 @@ export class ProgramUpdateComponent implements OnInit {
       recieptNumber: program.recieptNumber,
       remark: program.remark,
       bookingDate: program.bookingDate ? program.bookingDate.format(DATE_TIME_FORMAT) : null,
-      status: program.status
+      status: program.status,
+      sevadar: program.sevadar
     });
   }
 
@@ -109,7 +121,8 @@ export class ProgramUpdateComponent implements OnInit {
       bookingDate: this.editForm.get(['bookingDate'])!.value
         ? moment(this.editForm.get(['bookingDate'])!.value, DATE_TIME_FORMAT)
         : undefined,
-      status: this.editForm.get(['status'])!.value
+      status: this.editForm.get(['status'])!.value,
+      sevadar: this.editForm.get(['sevadar'])!.value
     };
   }
 
@@ -127,5 +140,9 @@ export class ProgramUpdateComponent implements OnInit {
 
   protected onSaveError(): void {
     this.isSaving = false;
+  }
+
+  trackById(index: number, item: ISevadar): any {
+    return item.id;
   }
 }

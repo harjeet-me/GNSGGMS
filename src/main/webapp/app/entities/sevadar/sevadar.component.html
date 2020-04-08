@@ -47,7 +47,6 @@
                     <th scope="col"  jhiSortBy="sevaStartDate"><span jhiTranslate="gnsggmsApp.sevadar.sevaStartDate">Seva Start Date</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="sevaEndDate"><span jhiTranslate="gnsggmsApp.sevadar.sevaEndDate">Seva End Date</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="isValid"><span jhiTranslate="gnsggmsApp.sevadar.isValid">Is Valid</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="program.id"><span jhiTranslate="gnsggmsApp.sevadar.program">Program</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -60,11 +59,6 @@
                     <td>{{ sevadar.sevaStartDate | date:'medium' }}</td>
                     <td>{{ sevadar.sevaEndDate | date:'medium' }}</td>
                     <td>{{ sevadar.isValid }}</td>
-                    <td>
-                        <div *ngIf="sevadar.program">
-                            <a [routerLink]="['/program', sevadar.program?.id, 'view']" >{{ sevadar.program?.id }}</a>
-                        </div>
-                    </td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"

@@ -24,5 +24,6 @@
     <include file="config/liquibase/changelog/20200408215900_added_entity_constraints_Sevadar.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200408222500_added_entity_constraints_Student.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200408222600_added_entity_constraints_Charge.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200408215700_added_entity_constraints_Program.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

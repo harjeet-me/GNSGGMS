@@ -131,6 +131,14 @@
                         <option value="REQUESTED">{{ 'gnsggmsApp.EventStatus.REQUESTED' | translate }}</option>
                     </select>
                 </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gnsggmsApp.program.sevadar" for="field_sevadar">Sevadar</label>
+                    <select class="form-control" id="field_sevadar" name="sevadar" formControlName="sevadar">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="sevadarOption.id === editForm.get('sevadar')!.value?.id ? editForm.get('sevadar')!.value : sevadarOption" *ngFor="let sevadarOption of sevadars; trackBy: trackById">{{ sevadarOption.name }}</option>
+                    </select>
+                </div>
             </div>
 
             <div>

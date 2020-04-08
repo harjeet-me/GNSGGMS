@@ -72,10 +72,11 @@
     ],
     "relationships": [
         {
-            "relationshipType": "one-to-many",
+            "relationshipType": "many-to-one",
             "otherEntityName": "sevadar",
             "otherEntityRelationshipName": "program",
-            "relationshipName": "sevadar"
+            "relationshipName": "sevadar",
+            "otherEntityField": "name"
         }
     ],
     "changelogDate": "20200408215700",

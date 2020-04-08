@@ -1,5 +1,6 @@
 package org.gnsg.gms.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.annotations.ApiModel;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -11,8 +12,6 @@ import java.io.Serializable;
 import java.util.Objects;
 import java.math.BigDecimal;
 import java.time.Instant;
-import java.util.HashSet;
-import java.util.Set;
 
 import org.gnsg.gms.domain.enumeration.EVENTTYPE;
 
@@ -90,9 +89,9 @@ public class Program implements Serializable {
     @Column(name = "status")
     private EventStatus status;
 
-    @OneToMany(mappedBy = "program")
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Sevadar> sevadars = new HashSet<>();
+    @ManyToOne
+    @JsonIgnoreProperties("programs")
+    private Sevadar sevadar;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -311,29 +310,17 @@ public class Program implements Serializable {
         this.status = status;
     }
 
-    public Set<Sevadar> getSevadars() {
-        return sevadars;
+    public Sevadar getSevadar() {
+        return sevadar;
     }
 
-    public Program sevadars(Set<Sevadar> sevadars) {
-        this.sevadars = sevadars;
+    public Program sevadar(Sevadar sevadar) {
+        this.sevadar = sevadar;
         return this;
     }
 
-    public Program addSevadar(Sevadar sevadar) {
-        this.sevadars.add(sevadar);
-        sevadar.setProgram(this);
-        return this;
-    }
-
-    public Program removeSevadar(Sevadar sevadar) {
-        this.sevadars.remove(sevadar);
-        sevadar.setProgram(null);
-        return this;
-    }
-
-    public void setSevadars(Set<Sevadar> sevadars) {
-        this.sevadars = sevadars;
+    public void setSevadar(Sevadar sevadar) {
+        this.sevadar = sevadar;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

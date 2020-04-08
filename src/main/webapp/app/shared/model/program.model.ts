@@ -23,7 +23,7 @@ export interface IProgram {
   remark?: string;
   bookingDate?: Moment;
   status?: EventStatus;
-  sevadars?: ISevadar[];
+  sevadar?: ISevadar;
 }
 
 export class Program implements IProgram {
@@ -45,7 +45,7 @@ export class Program implements IProgram {
     public remark?: string,
     public bookingDate?: Moment,
     public status?: EventStatus,
-    public sevadars?: ISevadar[]
+    public sevadar?: ISevadar
   ) {
     this.withLangar = this.withLangar || false;
   }
