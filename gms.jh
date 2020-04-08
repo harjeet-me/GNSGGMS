@@ -73,7 +73,7 @@ enum EVENTTYPE {
 
 // defining multiple OneToMany relationships with comments
  relationship OneToMany {
-   Program {sevadar(name)} to Sevadar 
+   Sevadar  to   Program {sevadar(name)}
    }
 
 
