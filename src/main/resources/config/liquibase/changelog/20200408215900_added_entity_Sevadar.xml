@@ -34,9 +34,6 @@
             <column name="is_valid" type="boolean">
                 <constraints nullable="true" />
             </column>
-            <column name="program_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
         <dropDefaultValue tableName="sevadar" columnName="seva_start_date" columnDataType="datetime"/>

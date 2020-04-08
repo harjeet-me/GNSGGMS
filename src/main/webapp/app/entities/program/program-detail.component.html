@@ -72,6 +72,12 @@
                 <dd>
                     <span jhiTranslate="{{ 'gnsggmsApp.EventStatus.' + program.status }}">{{ program.status }}</span>
                 </dd>
+                <dt><span jhiTranslate="gnsggmsApp.program.sevadar">Sevadar</span></dt>
+                <dd>
+                    <div *ngIf="program.sevadar">
+                        <a [routerLink]="['/sevadar', program.sevadar?.id, 'view']">{{ program.sevadar?.name }}</a>
+                    </div>
+                </dd>
             </dl>
 
             <button type="submit"

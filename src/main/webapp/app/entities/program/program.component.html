@@ -57,6 +57,7 @@
                     <th scope="col"  jhiSortBy="remark"><span jhiTranslate="gnsggmsApp.program.remark">Remark</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="bookingDate"><span jhiTranslate="gnsggmsApp.program.bookingDate">Booking Date</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="status"><span jhiTranslate="gnsggmsApp.program.status">Status</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="sevadar.name"><span jhiTranslate="gnsggmsApp.program.sevadar">Sevadar</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -79,6 +80,11 @@
                     <td>{{ program.remark }}</td>
                     <td>{{ program.bookingDate | date:'medium' }}</td>
                     <td jhiTranslate="{{ 'gnsggmsApp.EventStatus.' + program.status }}">{{ program.status }}</td>
+                    <td>
+                        <div *ngIf="program.sevadar">
+                            <a [routerLink]="['/sevadar', program.sevadar?.id, 'view']" >{{ program.sevadar?.name }}</a>
+                        </div>
+                    </td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"

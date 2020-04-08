@@ -29,11 +29,10 @@
     ],
     "relationships": [
         {
-            "relationshipType": "many-to-one",
+            "relationshipType": "one-to-many",
             "otherEntityName": "program",
             "otherEntityRelationshipName": "sevadar",
-            "relationshipName": "program",
-            "otherEntityField": "id"
+            "relationshipName": "program"
         }
     ],
     "changelogDate": "20200408215900",

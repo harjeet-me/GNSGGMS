@@ -32,12 +32,6 @@
                 <dd>
                     <span>{{ sevadar.isValid }}</span>
                 </dd>
-                <dt><span jhiTranslate="gnsggmsApp.sevadar.program">Program</span></dt>
-                <dd>
-                    <div *ngIf="sevadar.program">
-                        <a [routerLink]="['/program', sevadar.program?.id, 'view']">{{ sevadar.program?.id }}</a>
-                    </div>
-                </dd>
             </dl>
 
             <button type="submit"
