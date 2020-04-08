@@ -1,0 +1,38 @@
+{
+    "name": "AppliedCharge",
+    "fields": [
+        {
+            "fieldName": "type",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "ammount",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "dueInterval",
+            "fieldType": "Integer"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "student",
+            "otherEntityRelationshipName": "appliedCharge",
+            "relationshipName": "student",
+            "otherEntityField": "fullName",
+            "ownerSide": false
+        }
+    ],
+    "changelogDate": "20200408222700",
+    "entityTableName": "applied_charge",
+    "dto": "no",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

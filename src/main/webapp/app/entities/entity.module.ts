@@ -15,6 +15,18 @@ import { RouterModule } from '@angular/router';
       {
         path: 'sevadar',
         loadChildren: () => import('./sevadar/sevadar.module').then(m => m.GnsggmsSevadarModule)
+      },
+      {
+        path: 'student',
+        loadChildren: () => import('./student/student.module').then(m => m.GnsggmsStudentModule)
+      },
+      {
+        path: 'charge',
+        loadChildren: () => import('./charge/charge.module').then(m => m.GnsggmsChargeModule)
+      },
+      {
+        path: 'applied-charge',
+        loadChildren: () => import('./applied-charge/applied-charge.module').then(m => m.GnsggmsAppliedChargeModule)
       }
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ])
