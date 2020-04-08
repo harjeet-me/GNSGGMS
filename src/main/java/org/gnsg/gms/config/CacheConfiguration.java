@@ -40,6 +40,10 @@ public class CacheConfiguration {
             createCache(cm, org.gnsg.gms.domain.User.class.getName());
             createCache(cm, org.gnsg.gms.domain.Authority.class.getName());
             createCache(cm, org.gnsg.gms.domain.User.class.getName() + ".authorities");
+            createCache(cm, org.gnsg.gms.domain.Program.class.getName());
+            createCache(cm, org.gnsg.gms.domain.Program.class.getName() + ".sevadars");
+            createCache(cm, org.gnsg.gms.domain.Task.class.getName());
+            createCache(cm, org.gnsg.gms.domain.Sevadar.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }
