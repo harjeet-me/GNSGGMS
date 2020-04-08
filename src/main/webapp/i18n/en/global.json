@@ -10,6 +10,9 @@
         "program": "Program",
         "task": "Task",
         "sevadar": "Sevadar",
+        "student": "Student",
+        "charge": "Charge",
+        "appliedCharge": "Applied Charge",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

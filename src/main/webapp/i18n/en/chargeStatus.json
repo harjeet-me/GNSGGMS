@@ -1,0 +1,9 @@
+{
+  "gnsggmsApp": {
+    "ChargeStatus": {
+      "null": "",
+      "DUE": "DUE",
+      "PAID": "PAID"
+    }
+  }
+}
