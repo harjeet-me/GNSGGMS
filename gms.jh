@@ -1,0 +1,91 @@
+
+// an ignored comment
+/** not an ignored comment */
+entity Program {
+	programType EVENTTYPE ,
+    location EVENTLOCATION
+    etime Instant,
+    family String,
+    phoneNumber String,
+    address String ,
+    withLangar Boolean,
+    langarMenu LANGARMENU ,
+    langarTime Instant ,
+    dueAmt BigDecimal,
+    paidAmt BigDecimal,
+    balAmt BigDecimal,
+    recieptNumber Long,
+    remark String ,
+    bookingDate Instant,
+    status EventStatus
+
+    
+}
+enum EventStatus{
+   BOOKED , COMPLETED , CANCELLED , REQUESTED
+}
+enum LANGARMENU {
+SIMPLE_JALEBI_SHAHIPANEER ,
+SIMPLE_JALEBI_MATARPANEER ,
+SIMPLE_KHEER_SHAHIPANEER ,
+SIMPLE_KHEER_MATARPANEER
+}
+enum EVENTLOCATION{
+HALL_2 , HALL_3 , GALLERY_UPSTAIRS , MAIN_HALL, HOME , GNSG_SENIOR_CENTER
+}
+
+/**
+ * Task entity.
+ * @author The JHipster team.
+ */
+entity Task {
+	title String,
+	description String ,
+    taskTime Instant
+}
+
+/**
+ * The Employee entity.
+ */
+entity Sevadar {
+	/**
+	* The firstname attribute.
+	*/
+	name String,
+	email String,
+	phoneNumber String,
+	sevaStartDate Instant,
+    sevaEndDate Instant,
+	isValid Boolean
+}
+
+
+enum EVENTTYPE {
+    SUKHMANI_SAHIB, 
+    SUKHMANI_SAHIB_AT_HOME,
+    FUNERAL_SEHAJ_PATH_BHOG, 
+    AKHAND_PATH_SAHIB ,
+    SEHAJ_PATH_START , 
+    LANGAR ,
+    KIRTAN,
+    SEHAJ_PATH_BHOG
+}
+
+// defining multiple OneToMany relationships with comments
+ relationship OneToMany {
+   Program {sevadar(name)} to Sevadar 
+   }
+
+
+// Set pagination options
+
+paginate Task , Program , Sevadar with pagination
+
+// Use Data Transfert Objects (DTO)
+// dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl
+
+// Set an angular suffix
+// angularSuffix * with mySuffix
