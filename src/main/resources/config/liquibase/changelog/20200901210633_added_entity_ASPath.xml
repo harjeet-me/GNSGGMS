@@ -16,6 +16,9 @@
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+            <column name="path" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
             <column name="family" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
@@ -81,6 +84,7 @@
                   separator=";"
                   tableName="as_path">
             <column name="id" type="numeric"/>
+            <column name="path" type="string"/>
             <column name="family" type="string"/>
             <column name="phone_number" type="string"/>
             <column name="address" type="string"/>

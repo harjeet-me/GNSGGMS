@@ -7,13 +7,12 @@ import org.gnsg.gms.repository.search.PRoulSearchRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
@@ -52,13 +51,14 @@ public class PRoulServiceImpl implements PRoulService {
     /**
      * Get all the pRouls.
      *
+     * @param pageable the pagination information.
      * @return the list of entities.
      */
     @Override
     @Transactional(readOnly = true)
-    public List<PRoul> findAll() {
+    public Page<PRoul> findAll(Pageable pageable) {
         log.debug("Request to get all PRouls");
-        return pRoulRepository.findAll();
+        return pRoulRepository.findAll(pageable);
     }
 
 
@@ -92,14 +92,12 @@ public class PRoulServiceImpl implements PRoulService {
      * Search for the pRoul corresponding to the query.
      *
      * @param query the query of the search.
+     * @param pageable the pagination information.
      * @return the list of entities.
      */
     @Override
     @Transactional(readOnly = true)
-    public List<PRoul> search(String query) {
-        log.debug("Request to search PRouls for query {}", query);
-        return StreamSupport
-            .stream(pRoulSearchRepository.search(queryStringQuery(query)).spliterator(), false)
-        .collect(Collectors.toList());
-    }
+    public Page<PRoul> search(String query, Pageable pageable) {
+        log.debug("Request to search for a page of PRouls for query {}", query);
+        return pRoulSearchRepository.search(queryStringQuery(query), pageable);    }
 }

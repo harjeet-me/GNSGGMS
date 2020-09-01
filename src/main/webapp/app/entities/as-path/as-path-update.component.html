@@ -12,6 +12,14 @@
                 </div>
 
                 <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gnsggmsApp.aSPath.path" for="field_path">Path</label>
+                    <select class="form-control" name="path" formControlName="path" id="field_path">
+                        <option value="AKHAND_PATH">{{ 'gnsggmsApp.PATHTYPE.AKHAND_PATH' | translate }}</option>
+                        <option value="SEHAJ_PATH">{{ 'gnsggmsApp.PATHTYPE.SEHAJ_PATH' | translate }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="gnsggmsApp.aSPath.family" for="field_family">Family</label>
                     <input type="text" class="form-control" name="family" id="field_family"
                            formControlName="family"/>

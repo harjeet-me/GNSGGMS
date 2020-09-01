@@ -2,6 +2,11 @@
   "name": "ASPath",
   "fields": [
     {
+      "fieldName": "path",
+      "fieldType": "PATHTYPE",
+      "fieldValues": "AKHAND_PATH,SEHAJ_PATH"
+    },
+    {
       "fieldName": "family",
       "fieldType": "String"
     },
@@ -66,7 +71,7 @@
   "changelogDate": "20200901210633",
   "entityTableName": "as_path",
   "dto": "no",
-  "pagination": "no",
+  "pagination": "pagination",
   "service": "serviceImpl",
   "jpaMetamodelFiltering": false,
   "fluentMethods": true,

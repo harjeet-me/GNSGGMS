@@ -2,7 +2,9 @@ package org.gnsg.gms.service;
 
 import org.gnsg.gms.domain.ASPath;
 
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import java.util.Optional;
 
 /**
@@ -21,9 +23,10 @@ public interface ASPathService {
     /**
      * Get all the aSPaths.
      *
+     * @param pageable the pagination information.
      * @return the list of entities.
      */
-    List<ASPath> findAll();
+    Page<ASPath> findAll(Pageable pageable);
 
 
     /**
@@ -46,7 +49,8 @@ public interface ASPathService {
      *
      * @param query the query of the search.
      * 
+     * @param pageable the pagination information.
      * @return the list of entities.
      */
-    List<ASPath> search(String query);
+    Page<ASPath> search(String query, Pageable pageable);
 }

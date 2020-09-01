@@ -21,6 +21,7 @@ export class ASPathUpdateComponent implements OnInit {
 
   editForm = this.fb.group({
     id: [],
+    path: [],
     family: [],
     phoneNumber: [],
     address: [],
@@ -54,6 +55,7 @@ export class ASPathUpdateComponent implements OnInit {
   updateForm(aSPath: IASPath): void {
     this.editForm.patchValue({
       id: aSPath.id,
+      path: aSPath.path,
       family: aSPath.family,
       phoneNumber: aSPath.phoneNumber,
       address: aSPath.address,
@@ -88,6 +90,7 @@ export class ASPathUpdateComponent implements OnInit {
     return {
       ...new ASPath(),
       id: this.editForm.get(['id'])!.value,
+      path: this.editForm.get(['path'])!.value,
       family: this.editForm.get(['family'])!.value,
       phoneNumber: this.editForm.get(['phoneNumber'])!.value,
       address: this.editForm.get(['address'])!.value,
