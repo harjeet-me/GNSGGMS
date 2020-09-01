@@ -25,8 +25,11 @@ entity Program {
 
     
 }
-
+enum PATHTYPE{
+   AKHAND_PATH , SEHAJ_PATH 
+}
 entity ASPath {
+    path PATHTYPE ,
 	family String,
     phoneNumber String,
     address String ,
@@ -142,7 +145,7 @@ enum EVENTTYPE {
 
 // Set pagination options
 
-paginate Task , Program , Sevadar with pagination
+paginate PRoul , Task , ASPath , Program , Sevadar with pagination
 
 // Use Data Transfert Objects (DTO)
 // dto * with mapstruct
