@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { JhiEventManager } from 'ng-jhipster';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -13,7 +13,7 @@ import { TaskDeleteDialogComponent } from './task-delete-dialog.component';
 
 @Component({
   selector: 'jhi-task',
-  templateUrl: './task.component.html'
+  templateUrl: './task.component.html',
 })
 export class TaskComponent implements OnInit, OnDestroy {
   tasks?: ITask[];
@@ -48,7 +48,7 @@ export class TaskComponent implements OnInit, OnDestroy {
           page: pageToLoad - 1,
           query: this.currentSearch,
           size: this.itemsPerPage,
-          sort: this.sort()
+          sort: this.sort(),
         })
         .subscribe(
           (res: HttpResponse<ITask[]>) => this.onSuccess(res.body, res.headers, pageToLoad),
@@ -61,7 +61,7 @@ export class TaskComponent implements OnInit, OnDestroy {
       .query({
         page: pageToLoad - 1,
         size: this.itemsPerPage,
-        sort: this.sort()
+        sort: this.sort(),
       })
       .subscribe(
         (res: HttpResponse<ITask[]>) => this.onSuccess(res.body, res.headers, pageToLoad),
@@ -82,7 +82,26 @@ export class TaskComponent implements OnInit, OnDestroy {
       this.ngbPaginationPage = data.pagingParams.page;
       this.loadPage();
     });
+    this.handleBackNavigation();
     this.registerChangeInTasks();
+  }
+
+  handleBackNavigation(): void {
+    this.activatedRoute.queryParamMap.subscribe((params: ParamMap) => {
+      const prevPage = params.get('page');
+      const prevSort = params.get('sort');
+      const prevSortSplit = prevSort?.split(',');
+      if (prevSortSplit) {
+        this.predicate = prevSortSplit[0];
+        this.ascending = prevSortSplit[1] === 'asc';
+      }
+      if (prevPage && +prevPage !== this.page) {
+        this.ngbPaginationPage = +prevPage;
+        this.loadPage(+prevPage);
+      } else {
+        this.loadPage(this.page);
+      }
+    });
   }
 
   ngOnDestroy(): void {
@@ -122,8 +141,8 @@ export class TaskComponent implements OnInit, OnDestroy {
         page: this.page,
         size: this.itemsPerPage,
         search: this.currentSearch,
-        sort: this.predicate + ',' + (this.ascending ? 'asc' : 'desc')
-      }
+        sort: this.predicate + ',' + (this.ascending ? 'asc' : 'desc'),
+      },
     });
     this.tasks = data || [];
   }

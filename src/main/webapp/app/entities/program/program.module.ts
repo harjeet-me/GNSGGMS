@@ -11,6 +11,6 @@ import { programRoute } from './program.route';
 @NgModule({
   imports: [GnsggmsSharedModule, RouterModule.forChild(programRoute)],
   declarations: [ProgramComponent, ProgramDetailComponent, ProgramUpdateComponent, ProgramDeleteDialogComponent],
-  entryComponents: [ProgramDeleteDialogComponent]
+  entryComponents: [ProgramDeleteDialogComponent],
 })
 export class GnsggmsProgramModule {}

@@ -61,6 +61,7 @@ public class ProgramServiceImpl implements ProgramService {
         return programRepository.findAll(pageable);
     }
 
+
     /**
      * Get one program by id.
      *
@@ -82,6 +83,7 @@ public class ProgramServiceImpl implements ProgramService {
     @Override
     public void delete(Long id) {
         log.debug("Request to delete Program : {}", id);
+
         programRepository.deleteById(id);
         programSearchRepository.deleteById(id);
     }

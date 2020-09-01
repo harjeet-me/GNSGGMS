@@ -12,7 +12,7 @@ import { TaskService } from './task.service';
 
 @Component({
   selector: 'jhi-task-update',
-  templateUrl: './task-update.component.html'
+  templateUrl: './task-update.component.html',
 })
 export class TaskUpdateComponent implements OnInit {
   isSaving = false;
@@ -21,7 +21,7 @@ export class TaskUpdateComponent implements OnInit {
     id: [],
     title: [],
     description: [],
-    taskTime: []
+    taskTime: [],
   });
 
   constructor(protected taskService: TaskService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
@@ -42,7 +42,7 @@ export class TaskUpdateComponent implements OnInit {
       id: task.id,
       title: task.title,
       description: task.description,
-      taskTime: task.taskTime ? task.taskTime.format(DATE_TIME_FORMAT) : null
+      taskTime: task.taskTime ? task.taskTime.format(DATE_TIME_FORMAT) : null,
     });
   }
 
@@ -66,7 +66,7 @@ export class TaskUpdateComponent implements OnInit {
       id: this.editForm.get(['id'])!.value,
       title: this.editForm.get(['title'])!.value,
       description: this.editForm.get(['description'])!.value,
-      taskTime: this.editForm.get(['taskTime'])!.value ? moment(this.editForm.get(['taskTime'])!.value, DATE_TIME_FORMAT) : undefined
+      taskTime: this.editForm.get(['taskTime'])!.value ? moment(this.editForm.get(['taskTime'])!.value, DATE_TIME_FORMAT) : undefined,
     };
   }
 

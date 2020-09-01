@@ -16,7 +16,7 @@ describe('Service Tests', () => {
 
     beforeEach(() => {
       TestBed.configureTestingModule({
-        imports: [HttpClientTestingModule]
+        imports: [HttpClientTestingModule],
       });
       expectedResult = null;
       injector = getTestBed();
@@ -24,7 +24,20 @@ describe('Service Tests', () => {
       httpMock = injector.get(HttpTestingController);
       currentDate = moment();
 
-      elemDefault = new Sevadar(0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', currentDate, currentDate, false);
+      elemDefault = new Sevadar(
+        0,
+        'AAAAAAA',
+        'AAAAAAA',
+        'AAAAAAA',
+        'AAAAAAA',
+        currentDate,
+        currentDate,
+        false,
+        currentDate,
+        'AAAAAAA',
+        currentDate,
+        'AAAAAAA'
+      );
     });
 
     describe('Service methods', () => {
@@ -32,7 +45,9 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             sevaStartDate: currentDate.format(DATE_TIME_FORMAT),
-            sevaEndDate: currentDate.format(DATE_TIME_FORMAT)
+            sevaEndDate: currentDate.format(DATE_TIME_FORMAT),
+            createdDate: currentDate.format(DATE_TIME_FORMAT),
+            lastModifiedDate: currentDate.format(DATE_TIME_FORMAT),
           },
           elemDefault
         );
@@ -49,7 +64,9 @@ describe('Service Tests', () => {
           {
             id: 0,
             sevaStartDate: currentDate.format(DATE_TIME_FORMAT),
-            sevaEndDate: currentDate.format(DATE_TIME_FORMAT)
+            sevaEndDate: currentDate.format(DATE_TIME_FORMAT),
+            createdDate: currentDate.format(DATE_TIME_FORMAT),
+            lastModifiedDate: currentDate.format(DATE_TIME_FORMAT),
           },
           elemDefault
         );
@@ -57,7 +74,9 @@ describe('Service Tests', () => {
         const expected = Object.assign(
           {
             sevaStartDate: currentDate,
-            sevaEndDate: currentDate
+            sevaEndDate: currentDate,
+            createdDate: currentDate,
+            lastModifiedDate: currentDate,
           },
           returnedFromService
         );
@@ -75,9 +94,14 @@ describe('Service Tests', () => {
             name: 'BBBBBB',
             email: 'BBBBBB',
             phoneNumber: 'BBBBBB',
+            address: 'BBBBBB',
             sevaStartDate: currentDate.format(DATE_TIME_FORMAT),
             sevaEndDate: currentDate.format(DATE_TIME_FORMAT),
-            isValid: true
+            isValid: true,
+            createdDate: currentDate.format(DATE_TIME_FORMAT),
+            createdBy: 'BBBBBB',
+            lastModifiedDate: currentDate.format(DATE_TIME_FORMAT),
+            lastModifiedBy: 'BBBBBB',
           },
           elemDefault
         );
@@ -85,7 +109,9 @@ describe('Service Tests', () => {
         const expected = Object.assign(
           {
             sevaStartDate: currentDate,
-            sevaEndDate: currentDate
+            sevaEndDate: currentDate,
+            createdDate: currentDate,
+            lastModifiedDate: currentDate,
           },
           returnedFromService
         );
@@ -103,9 +129,14 @@ describe('Service Tests', () => {
             name: 'BBBBBB',
             email: 'BBBBBB',
             phoneNumber: 'BBBBBB',
+            address: 'BBBBBB',
             sevaStartDate: currentDate.format(DATE_TIME_FORMAT),
             sevaEndDate: currentDate.format(DATE_TIME_FORMAT),
-            isValid: true
+            isValid: true,
+            createdDate: currentDate.format(DATE_TIME_FORMAT),
+            createdBy: 'BBBBBB',
+            lastModifiedDate: currentDate.format(DATE_TIME_FORMAT),
+            lastModifiedBy: 'BBBBBB',
           },
           elemDefault
         );
@@ -113,7 +144,9 @@ describe('Service Tests', () => {
         const expected = Object.assign(
           {
             sevaStartDate: currentDate,
-            sevaEndDate: currentDate
+            sevaEndDate: currentDate,
+            createdDate: currentDate,
+            lastModifiedDate: currentDate,
           },
           returnedFromService
         );

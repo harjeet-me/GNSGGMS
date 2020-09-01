@@ -17,18 +17,50 @@ entity Program {
     recieptNumber Long,
     remark String ,
     bookingDate Instant,
-    status EventStatus
+    status EventStatus,
+    createdDate Instant ,
+    createdBy String ,
+    lastModifiedDate Instant ,
+    lastModifiedBy String
 
     
 }
+
+entity ASPath {
+	family String,
+    phoneNumber String,
+    address String ,
+    startDate LocalDate ,
+    endDate LocalDate,
+    remark String ,
+    bookingDate Instant,
+    desc String ,
+    status EventStatus,
+     createdDate Instant ,
+    createdBy String ,
+    lastModifiedDate Instant ,
+    lastModifiedBy String
+
+    
+}
+
 enum EventStatus{
-   BOOKED , COMPLETED , CANCELLED , REQUESTED
+   BOOKED , COMPLETED , CANCELLED , REQUESTED , PAID
+}
+
+enum ROULTIME{
+   T10_12 , COMPLETED , CANCELLED , REQUESTED , PAID
 }
 enum LANGARMENU {
 SIMPLE_JALEBI_SHAHIPANEER ,
 SIMPLE_JALEBI_MATARPANEER ,
 SIMPLE_KHEER_SHAHIPANEER ,
-SIMPLE_KHEER_MATARPANEER
+SIMPLE_KHEER_MATARPANEER,
+SIMPLE_JALEBI_PALAKPANEER ,
+SIMPLE_KHEER_PALAKPANEER ,
+PAKOURE,
+JALEBI,
+KHEER
 }
 enum EVENTLOCATION{
 HALL_2 , HALL_3 , GALLERY_UPSTAIRS , MAIN_HALL, HOME , GNSG_SENIOR_CENTER
@@ -54,12 +86,31 @@ entity Sevadar {
 	name String,
 	email String,
 	phoneNumber String,
-	sevaStartDate Instant,
+    address String ,
+    sevaStartDate Instant,
     sevaEndDate Instant,
-	isValid Boolean
+	isValid Boolean,
+     createdDate Instant ,
+    createdBy String ,
+    lastModifiedDate Instant ,
+    lastModifiedBy String
 }
 
 
+
+entity PRoul {
+	/**
+	* The firstname attribute.
+	*/
+    name String
+	desc String,
+	totalRoul String ,
+    createdDate Instant ,
+    createdBy String ,
+    lastModifiedDate Instant ,
+    lastModifiedBy String
+	
+}
 enum EVENTTYPE {
     SUKHMANI_SAHIB, 
     SUKHMANI_SAHIB_AT_HOME,
@@ -68,12 +119,24 @@ enum EVENTTYPE {
     SEHAJ_PATH_START , 
     LANGAR ,
     KIRTAN,
-    SEHAJ_PATH_BHOG
+    SEHAJ_PATH_BHOG ,
+    DEG_SEVA
 }
 
 // defining multiple OneToMany relationships with comments
  relationship OneToMany {
-   Sevadar  to   Program {sevadar(name)}
+   //Sevadar  to   Program {sevadar(name)}
+   
+    Sevadar  to   Program {sevadar(name)}
+    ASPath to  PRoul {sehajPath(desc)} 
+      //Sevadar  to   SehajPath {granthi(name)}
+   }
+
+ relationship OneToOne {
+    PRoul {pathi(name)} to     Sevadar 
+  
+   
+   
    }
 
 

@@ -18,7 +18,7 @@ describe('Component Tests', () => {
       TestBed.configureTestingModule({
         imports: [GnsggmsTestModule],
         declarations: [ProgramUpdateComponent],
-        providers: [FormBuilder]
+        providers: [FormBuilder],
       })
         .overrideTemplate(ProgramUpdateComponent, '')
         .compileComponents();

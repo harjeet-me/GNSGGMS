@@ -18,7 +18,7 @@ describe('Component Tests', () => {
       TestBed.configureTestingModule({
         imports: [GnsggmsTestModule],
         declarations: [SevadarUpdateComponent],
-        providers: [FormBuilder]
+        providers: [FormBuilder],
       })
         .overrideTemplate(SevadarUpdateComponent, '')
         .compileComponents();

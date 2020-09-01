@@ -59,7 +59,9 @@ export class SevadarService {
   protected convertDateFromClient(sevadar: ISevadar): ISevadar {
     const copy: ISevadar = Object.assign({}, sevadar, {
       sevaStartDate: sevadar.sevaStartDate && sevadar.sevaStartDate.isValid() ? sevadar.sevaStartDate.toJSON() : undefined,
-      sevaEndDate: sevadar.sevaEndDate && sevadar.sevaEndDate.isValid() ? sevadar.sevaEndDate.toJSON() : undefined
+      sevaEndDate: sevadar.sevaEndDate && sevadar.sevaEndDate.isValid() ? sevadar.sevaEndDate.toJSON() : undefined,
+      createdDate: sevadar.createdDate && sevadar.createdDate.isValid() ? sevadar.createdDate.toJSON() : undefined,
+      lastModifiedDate: sevadar.lastModifiedDate && sevadar.lastModifiedDate.isValid() ? sevadar.lastModifiedDate.toJSON() : undefined,
     });
     return copy;
   }
@@ -68,6 +70,8 @@ export class SevadarService {
     if (res.body) {
       res.body.sevaStartDate = res.body.sevaStartDate ? moment(res.body.sevaStartDate) : undefined;
       res.body.sevaEndDate = res.body.sevaEndDate ? moment(res.body.sevaEndDate) : undefined;
+      res.body.createdDate = res.body.createdDate ? moment(res.body.createdDate) : undefined;
+      res.body.lastModifiedDate = res.body.lastModifiedDate ? moment(res.body.lastModifiedDate) : undefined;
     }
     return res;
   }
@@ -77,6 +81,8 @@ export class SevadarService {
       res.body.forEach((sevadar: ISevadar) => {
         sevadar.sevaStartDate = sevadar.sevaStartDate ? moment(sevadar.sevaStartDate) : undefined;
         sevadar.sevaEndDate = sevadar.sevaEndDate ? moment(sevadar.sevaEndDate) : undefined;
+        sevadar.createdDate = sevadar.createdDate ? moment(sevadar.createdDate) : undefined;
+        sevadar.lastModifiedDate = sevadar.lastModifiedDate ? moment(sevadar.lastModifiedDate) : undefined;
       });
     }
     return res;

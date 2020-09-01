@@ -6,7 +6,7 @@ import { ITask } from 'app/shared/model/task.model';
 import { TaskService } from './task.service';
 
 @Component({
-  templateUrl: './task-delete-dialog.component.html'
+  templateUrl: './task-delete-dialog.component.html',
 })
 export class TaskDeleteDialogComponent {
   task?: ITask;

@@ -61,6 +61,7 @@ public class TaskServiceImpl implements TaskService {
         return taskRepository.findAll(pageable);
     }
 
+
     /**
      * Get one task by id.
      *
@@ -82,6 +83,7 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public void delete(Long id) {
         log.debug("Request to delete Task : {}", id);
+
         taskRepository.deleteById(id);
         taskSearchRepository.deleteById(id);
     }

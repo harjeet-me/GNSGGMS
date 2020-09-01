@@ -3,7 +3,7 @@
     xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
     xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd
                         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
         <property name="autoIncrement" value="true"/>
@@ -25,6 +25,9 @@
             <column name="phone_number" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+            <column name="address" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
             <column name="seva_start_date" type="datetime">
                 <constraints nullable="true" />
             </column>
@@ -34,16 +37,30 @@
             <column name="is_valid" type="boolean">
                 <constraints nullable="true" />
             </column>
-            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
+            <column name="created_date" type="datetime">
+                <constraints nullable="true" />
+            </column>
+            <column name="created_by" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="last_modified_date" type="datetime">
+                <constraints nullable="true" />
+            </column>
+            <column name="last_modified_by" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
         <dropDefaultValue tableName="sevadar" columnName="seva_start_date" columnDataType="datetime"/>
         <dropDefaultValue tableName="sevadar" columnName="seva_end_date" columnDataType="datetime"/>
+        <dropDefaultValue tableName="sevadar" columnName="created_date" columnDataType="datetime"/>
+        <dropDefaultValue tableName="sevadar" columnName="last_modified_date" columnDataType="datetime"/>
     </changeSet>
 
     <changeSet id="20200408215900-1-relations" author="jhipster">
 
     </changeSet>
-    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
 
     <!--
         Load sample data generated with Faker.js
@@ -62,10 +79,15 @@
             <column name="name" type="string"/>
             <column name="email" type="string"/>
             <column name="phone_number" type="string"/>
+            <column name="address" type="string"/>
             <column name="seva_start_date" type="datetime"/>
             <column name="seva_end_date" type="datetime"/>
             <column name="is_valid" type="boolean"/>
-            <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here, do not remove-->
+            <column name="created_date" type="datetime"/>
+            <column name="created_by" type="string"/>
+            <column name="last_modified_date" type="datetime"/>
+            <column name="last_modified_by" type="string"/>
+            <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>
 

@@ -5,7 +5,7 @@ import { IProgram } from 'app/shared/model/program.model';
 
 @Component({
   selector: 'jhi-program-detail',
-  templateUrl: './program-detail.component.html'
+  templateUrl: './program-detail.component.html',
 })
 export class ProgramDetailComponent implements OnInit {
   program: IProgram | null = null;

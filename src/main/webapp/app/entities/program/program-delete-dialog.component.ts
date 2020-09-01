@@ -6,7 +6,7 @@ import { IProgram } from 'app/shared/model/program.model';
 import { ProgramService } from './program.service';
 
 @Component({
-  templateUrl: './program-delete-dialog.component.html'
+  templateUrl: './program-delete-dialog.component.html',
 })
 export class ProgramDeleteDialogComponent {
   program?: IProgram;

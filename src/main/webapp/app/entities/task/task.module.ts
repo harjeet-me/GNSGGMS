@@ -11,6 +11,6 @@ import { taskRoute } from './task.route';
 @NgModule({
   imports: [GnsggmsSharedModule, RouterModule.forChild(taskRoute)],
   declarations: [TaskComponent, TaskDetailComponent, TaskUpdateComponent, TaskDeleteDialogComponent],
-  entryComponents: [TaskDeleteDialogComponent]
+  entryComponents: [TaskDeleteDialogComponent],
 })
 export class GnsggmsTaskModule {}

@@ -13,6 +13,8 @@
         "student": "Student",
         "charge": "Charge",
         "appliedCharge": "Applied Charge",
+        "asPath": "AS Path",
+        "pRoul": "P Roul",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

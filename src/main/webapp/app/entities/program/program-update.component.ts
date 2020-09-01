@@ -14,7 +14,7 @@ import { SevadarService } from 'app/entities/sevadar/sevadar.service';
 
 @Component({
   selector: 'jhi-program-update',
-  templateUrl: './program-update.component.html'
+  templateUrl: './program-update.component.html',
 })
 export class ProgramUpdateComponent implements OnInit {
   isSaving = false;
@@ -38,7 +38,11 @@ export class ProgramUpdateComponent implements OnInit {
     remark: [],
     bookingDate: [],
     status: [],
-    sevadar: []
+    createdDate: [],
+    createdBy: [],
+    lastModifiedDate: [],
+    lastModifiedBy: [],
+    sevadar: [],
   });
 
   constructor(
@@ -55,6 +59,8 @@ export class ProgramUpdateComponent implements OnInit {
         program.etime = today;
         program.langarTime = today;
         program.bookingDate = today;
+        program.createdDate = today;
+        program.lastModifiedDate = today;
       }
 
       this.updateForm(program);
@@ -82,7 +88,11 @@ export class ProgramUpdateComponent implements OnInit {
       remark: program.remark,
       bookingDate: program.bookingDate ? program.bookingDate.format(DATE_TIME_FORMAT) : null,
       status: program.status,
-      sevadar: program.sevadar
+      createdDate: program.createdDate ? program.createdDate.format(DATE_TIME_FORMAT) : null,
+      createdBy: program.createdBy,
+      lastModifiedDate: program.lastModifiedDate ? program.lastModifiedDate.format(DATE_TIME_FORMAT) : null,
+      lastModifiedBy: program.lastModifiedBy,
+      sevadar: program.sevadar,
     });
   }
 
@@ -122,7 +132,15 @@ export class ProgramUpdateComponent implements OnInit {
         ? moment(this.editForm.get(['bookingDate'])!.value, DATE_TIME_FORMAT)
         : undefined,
       status: this.editForm.get(['status'])!.value,
-      sevadar: this.editForm.get(['sevadar'])!.value
+      createdDate: this.editForm.get(['createdDate'])!.value
+        ? moment(this.editForm.get(['createdDate'])!.value, DATE_TIME_FORMAT)
+        : undefined,
+      createdBy: this.editForm.get(['createdBy'])!.value,
+      lastModifiedDate: this.editForm.get(['lastModifiedDate'])!.value
+        ? moment(this.editForm.get(['lastModifiedDate'])!.value, DATE_TIME_FORMAT)
+        : undefined,
+      lastModifiedBy: this.editForm.get(['lastModifiedBy'])!.value,
+      sevadar: this.editForm.get(['sevadar'])!.value,
     };
   }
 

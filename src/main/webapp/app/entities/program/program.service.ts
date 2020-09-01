@@ -60,7 +60,9 @@ export class ProgramService {
     const copy: IProgram = Object.assign({}, program, {
       etime: program.etime && program.etime.isValid() ? program.etime.toJSON() : undefined,
       langarTime: program.langarTime && program.langarTime.isValid() ? program.langarTime.toJSON() : undefined,
-      bookingDate: program.bookingDate && program.bookingDate.isValid() ? program.bookingDate.toJSON() : undefined
+      bookingDate: program.bookingDate && program.bookingDate.isValid() ? program.bookingDate.toJSON() : undefined,
+      createdDate: program.createdDate && program.createdDate.isValid() ? program.createdDate.toJSON() : undefined,
+      lastModifiedDate: program.lastModifiedDate && program.lastModifiedDate.isValid() ? program.lastModifiedDate.toJSON() : undefined,
     });
     return copy;
   }
@@ -70,6 +72,8 @@ export class ProgramService {
       res.body.etime = res.body.etime ? moment(res.body.etime) : undefined;
       res.body.langarTime = res.body.langarTime ? moment(res.body.langarTime) : undefined;
       res.body.bookingDate = res.body.bookingDate ? moment(res.body.bookingDate) : undefined;
+      res.body.createdDate = res.body.createdDate ? moment(res.body.createdDate) : undefined;
+      res.body.lastModifiedDate = res.body.lastModifiedDate ? moment(res.body.lastModifiedDate) : undefined;
     }
     return res;
   }
@@ -80,6 +84,8 @@ export class ProgramService {
         program.etime = program.etime ? moment(program.etime) : undefined;
         program.langarTime = program.langarTime ? moment(program.langarTime) : undefined;
         program.bookingDate = program.bookingDate ? moment(program.bookingDate) : undefined;
+        program.createdDate = program.createdDate ? moment(program.createdDate) : undefined;
+        program.lastModifiedDate = program.lastModifiedDate ? moment(program.lastModifiedDate) : undefined;
       });
     }
     return res;

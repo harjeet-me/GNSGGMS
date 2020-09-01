@@ -122,6 +122,7 @@ public class ProgramResource {
     @DeleteMapping("/programs/{id}")
     public ResponseEntity<Void> deleteProgram(@PathVariable Long id) {
         log.debug("REST request to delete Program : {}", id);
+
         programService.delete(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
     }
@@ -140,5 +141,5 @@ public class ProgramResource {
         Page<Program> page = programService.search(query, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
-    }
+        }
 }

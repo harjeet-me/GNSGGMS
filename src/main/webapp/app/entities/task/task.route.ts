@@ -40,49 +40,49 @@ export const taskRoute: Routes = [
     path: '',
     component: TaskComponent,
     resolve: {
-      pagingParams: JhiResolvePagingParams
+      pagingParams: JhiResolvePagingParams,
     },
     data: {
       authorities: [Authority.USER],
       defaultSort: 'id,asc',
-      pageTitle: 'gnsggmsApp.task.home.title'
+      pageTitle: 'gnsggmsApp.task.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/view',
     component: TaskDetailComponent,
     resolve: {
-      task: TaskResolve
+      task: TaskResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'gnsggmsApp.task.home.title'
+      pageTitle: 'gnsggmsApp.task.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: 'new',
     component: TaskUpdateComponent,
     resolve: {
-      task: TaskResolve
+      task: TaskResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'gnsggmsApp.task.home.title'
+      pageTitle: 'gnsggmsApp.task.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/edit',
     component: TaskUpdateComponent,
     resolve: {
-      task: TaskResolve
+      task: TaskResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'gnsggmsApp.task.home.title'
+      pageTitle: 'gnsggmsApp.task.home.title',
     },
-    canActivate: [UserRouteAccessService]
-  }
+    canActivate: [UserRouteAccessService],
+  },
 ];

@@ -20,9 +20,14 @@
       "name": "Name",
       "email": "Email",
       "phoneNumber": "Phone Number",
+      "address": "Address",
       "sevaStartDate": "Seva Start Date",
       "sevaEndDate": "Seva End Date",
       "isValid": "Is Valid",
+      "createdDate": "Created Date",
+      "createdBy": "Created By",
+      "lastModifiedDate": "Last Modified Date",
+      "lastModifiedBy": "Last Modified By",
       "program": "Program",
       "help": {
         "name": "The firstname attribute."

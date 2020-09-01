@@ -5,7 +5,8 @@
       "BOOKED": "BOOKED",
       "COMPLETED": "COMPLETED",
       "CANCELLED": "CANCELLED",
-      "REQUESTED": "REQUESTED"
+      "REQUESTED": "REQUESTED",
+      "PAID": "PAID"
     }
   }
 }

@@ -16,7 +16,7 @@ describe('Service Tests', () => {
 
     beforeEach(() => {
       TestBed.configureTestingModule({
-        imports: [HttpClientTestingModule]
+        imports: [HttpClientTestingModule],
       });
       expectedResult = null;
       injector = getTestBed();
@@ -31,7 +31,7 @@ describe('Service Tests', () => {
       it('should find an element', () => {
         const returnedFromService = Object.assign(
           {
-            taskTime: currentDate.format(DATE_TIME_FORMAT)
+            taskTime: currentDate.format(DATE_TIME_FORMAT),
           },
           elemDefault
         );
@@ -47,14 +47,14 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             id: 0,
-            taskTime: currentDate.format(DATE_TIME_FORMAT)
+            taskTime: currentDate.format(DATE_TIME_FORMAT),
           },
           elemDefault
         );
 
         const expected = Object.assign(
           {
-            taskTime: currentDate
+            taskTime: currentDate,
           },
           returnedFromService
         );
@@ -71,14 +71,14 @@ describe('Service Tests', () => {
           {
             title: 'BBBBBB',
             description: 'BBBBBB',
-            taskTime: currentDate.format(DATE_TIME_FORMAT)
+            taskTime: currentDate.format(DATE_TIME_FORMAT),
           },
           elemDefault
         );
 
         const expected = Object.assign(
           {
-            taskTime: currentDate
+            taskTime: currentDate,
           },
           returnedFromService
         );
@@ -95,14 +95,14 @@ describe('Service Tests', () => {
           {
             title: 'BBBBBB',
             description: 'BBBBBB',
-            taskTime: currentDate.format(DATE_TIME_FORMAT)
+            taskTime: currentDate.format(DATE_TIME_FORMAT),
           },
           elemDefault
         );
 
         const expected = Object.assign(
           {
-            taskTime: currentDate
+            taskTime: currentDate,
           },
           returnedFromService
         );

@@ -40,49 +40,49 @@ export const programRoute: Routes = [
     path: '',
     component: ProgramComponent,
     resolve: {
-      pagingParams: JhiResolvePagingParams
+      pagingParams: JhiResolvePagingParams,
     },
     data: {
       authorities: [Authority.USER],
       defaultSort: 'id,asc',
-      pageTitle: 'gnsggmsApp.program.home.title'
+      pageTitle: 'gnsggmsApp.program.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/view',
     component: ProgramDetailComponent,
     resolve: {
-      program: ProgramResolve
+      program: ProgramResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'gnsggmsApp.program.home.title'
+      pageTitle: 'gnsggmsApp.program.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: 'new',
     component: ProgramUpdateComponent,
     resolve: {
-      program: ProgramResolve
+      program: ProgramResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'gnsggmsApp.program.home.title'
+      pageTitle: 'gnsggmsApp.program.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/edit',
     component: ProgramUpdateComponent,
     resolve: {
-      program: ProgramResolve
+      program: ProgramResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'gnsggmsApp.program.home.title'
+      pageTitle: 'gnsggmsApp.program.home.title',
     },
-    canActivate: [UserRouteAccessService]
-  }
+    canActivate: [UserRouteAccessService],
+  },
 ];

@@ -122,6 +122,7 @@ public class SevadarResource {
     @DeleteMapping("/sevadars/{id}")
     public ResponseEntity<Void> deleteSevadar(@PathVariable Long id) {
         log.debug("REST request to delete Sevadar : {}", id);
+
         sevadarService.delete(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
     }
@@ -140,5 +141,5 @@ public class SevadarResource {
         Page<Sevadar> page = sevadarService.search(query, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
-    }
+        }
 }

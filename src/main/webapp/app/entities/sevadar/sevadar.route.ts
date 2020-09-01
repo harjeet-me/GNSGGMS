@@ -40,49 +40,49 @@ export const sevadarRoute: Routes = [
     path: '',
     component: SevadarComponent,
     resolve: {
-      pagingParams: JhiResolvePagingParams
+      pagingParams: JhiResolvePagingParams,
     },
     data: {
       authorities: [Authority.USER],
       defaultSort: 'id,asc',
-      pageTitle: 'gnsggmsApp.sevadar.home.title'
+      pageTitle: 'gnsggmsApp.sevadar.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/view',
     component: SevadarDetailComponent,
     resolve: {
-      sevadar: SevadarResolve
+      sevadar: SevadarResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'gnsggmsApp.sevadar.home.title'
+      pageTitle: 'gnsggmsApp.sevadar.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: 'new',
     component: SevadarUpdateComponent,
     resolve: {
-      sevadar: SevadarResolve
+      sevadar: SevadarResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'gnsggmsApp.sevadar.home.title'
+      pageTitle: 'gnsggmsApp.sevadar.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/edit',
     component: SevadarUpdateComponent,
     resolve: {
-      sevadar: SevadarResolve
+      sevadar: SevadarResolve,
     },
     data: {
       authorities: [Authority.USER],
-      pageTitle: 'gnsggmsApp.sevadar.home.title'
+      pageTitle: 'gnsggmsApp.sevadar.home.title',
     },
-    canActivate: [UserRouteAccessService]
-  }
+    canActivate: [UserRouteAccessService],
+  },
 ];

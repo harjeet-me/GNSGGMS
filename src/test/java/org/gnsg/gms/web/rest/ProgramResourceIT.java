@@ -95,6 +95,18 @@ public class ProgramResourceIT {
     private static final EventStatus DEFAULT_STATUS = EventStatus.BOOKED;
     private static final EventStatus UPDATED_STATUS = EventStatus.COMPLETED;
 
+    private static final Instant DEFAULT_CREATED_DATE = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_CREATED_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+
+    private static final String DEFAULT_CREATED_BY = "AAAAAAAAAA";
+    private static final String UPDATED_CREATED_BY = "BBBBBBBBBB";
+
+    private static final Instant DEFAULT_LAST_MODIFIED_DATE = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_LAST_MODIFIED_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+
+    private static final String DEFAULT_LAST_MODIFIED_BY = "AAAAAAAAAA";
+    private static final String UPDATED_LAST_MODIFIED_BY = "BBBBBBBBBB";
+
     @Autowired
     private ProgramRepository programRepository;
 
@@ -140,7 +152,11 @@ public class ProgramResourceIT {
             .recieptNumber(DEFAULT_RECIEPT_NUMBER)
             .remark(DEFAULT_REMARK)
             .bookingDate(DEFAULT_BOOKING_DATE)
-            .status(DEFAULT_STATUS);
+            .status(DEFAULT_STATUS)
+            .createdDate(DEFAULT_CREATED_DATE)
+            .createdBy(DEFAULT_CREATED_BY)
+            .lastModifiedDate(DEFAULT_LAST_MODIFIED_DATE)
+            .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY);
         return program;
     }
     /**
@@ -166,7 +182,11 @@ public class ProgramResourceIT {
             .recieptNumber(UPDATED_RECIEPT_NUMBER)
             .remark(UPDATED_REMARK)
             .bookingDate(UPDATED_BOOKING_DATE)
-            .status(UPDATED_STATUS);
+            .status(UPDATED_STATUS)
+            .createdDate(UPDATED_CREATED_DATE)
+            .createdBy(UPDATED_CREATED_BY)
+            .lastModifiedDate(UPDATED_LAST_MODIFIED_DATE)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
         return program;
     }
 
@@ -179,7 +199,6 @@ public class ProgramResourceIT {
     @Transactional
     public void createProgram() throws Exception {
         int databaseSizeBeforeCreate = programRepository.findAll().size();
-
         // Create the Program
         restProgramMockMvc.perform(post("/api/programs")
             .contentType(MediaType.APPLICATION_JSON)
@@ -206,6 +225,10 @@ public class ProgramResourceIT {
         assertThat(testProgram.getRemark()).isEqualTo(DEFAULT_REMARK);
         assertThat(testProgram.getBookingDate()).isEqualTo(DEFAULT_BOOKING_DATE);
         assertThat(testProgram.getStatus()).isEqualTo(DEFAULT_STATUS);
+        assertThat(testProgram.getCreatedDate()).isEqualTo(DEFAULT_CREATED_DATE);
+        assertThat(testProgram.getCreatedBy()).isEqualTo(DEFAULT_CREATED_BY);
+        assertThat(testProgram.getLastModifiedDate()).isEqualTo(DEFAULT_LAST_MODIFIED_DATE);
+        assertThat(testProgram.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
 
         // Validate the Program in Elasticsearch
         verify(mockProgramSearchRepository, times(1)).save(testProgram);
@@ -260,7 +283,11 @@ public class ProgramResourceIT {
             .andExpect(jsonPath("$.[*].recieptNumber").value(hasItem(DEFAULT_RECIEPT_NUMBER.intValue())))
             .andExpect(jsonPath("$.[*].remark").value(hasItem(DEFAULT_REMARK)))
             .andExpect(jsonPath("$.[*].bookingDate").value(hasItem(DEFAULT_BOOKING_DATE.toString())))
-            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())));
+            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())))
+            .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())))
+            .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
+            .andExpect(jsonPath("$.[*].lastModifiedDate").value(hasItem(DEFAULT_LAST_MODIFIED_DATE.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)));
     }
     
     @Test
@@ -289,9 +316,12 @@ public class ProgramResourceIT {
             .andExpect(jsonPath("$.recieptNumber").value(DEFAULT_RECIEPT_NUMBER.intValue()))
             .andExpect(jsonPath("$.remark").value(DEFAULT_REMARK))
             .andExpect(jsonPath("$.bookingDate").value(DEFAULT_BOOKING_DATE.toString()))
-            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()));
+            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()))
+            .andExpect(jsonPath("$.createdDate").value(DEFAULT_CREATED_DATE.toString()))
+            .andExpect(jsonPath("$.createdBy").value(DEFAULT_CREATED_BY))
+            .andExpect(jsonPath("$.lastModifiedDate").value(DEFAULT_LAST_MODIFIED_DATE.toString()))
+            .andExpect(jsonPath("$.lastModifiedBy").value(DEFAULT_LAST_MODIFIED_BY));
     }
-
     @Test
     @Transactional
     public void getNonExistingProgram() throws Exception {
@@ -305,8 +335,6 @@ public class ProgramResourceIT {
     public void updateProgram() throws Exception {
         // Initialize the database
         programService.save(program);
-        // As the test used the service layer, reset the Elasticsearch mock repository
-        reset(mockProgramSearchRepository);
 
         int databaseSizeBeforeUpdate = programRepository.findAll().size();
 
@@ -330,7 +358,11 @@ public class ProgramResourceIT {
             .recieptNumber(UPDATED_RECIEPT_NUMBER)
             .remark(UPDATED_REMARK)
             .bookingDate(UPDATED_BOOKING_DATE)
-            .status(UPDATED_STATUS);
+            .status(UPDATED_STATUS)
+            .createdDate(UPDATED_CREATED_DATE)
+            .createdBy(UPDATED_CREATED_BY)
+            .lastModifiedDate(UPDATED_LAST_MODIFIED_DATE)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
 
         restProgramMockMvc.perform(put("/api/programs")
             .contentType(MediaType.APPLICATION_JSON)
@@ -357,17 +389,19 @@ public class ProgramResourceIT {
         assertThat(testProgram.getRemark()).isEqualTo(UPDATED_REMARK);
         assertThat(testProgram.getBookingDate()).isEqualTo(UPDATED_BOOKING_DATE);
         assertThat(testProgram.getStatus()).isEqualTo(UPDATED_STATUS);
+        assertThat(testProgram.getCreatedDate()).isEqualTo(UPDATED_CREATED_DATE);
+        assertThat(testProgram.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
+        assertThat(testProgram.getLastModifiedDate()).isEqualTo(UPDATED_LAST_MODIFIED_DATE);
+        assertThat(testProgram.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
 
         // Validate the Program in Elasticsearch
-        verify(mockProgramSearchRepository, times(1)).save(testProgram);
+        verify(mockProgramSearchRepository, times(2)).save(testProgram);
     }
 
     @Test
     @Transactional
     public void updateNonExistingProgram() throws Exception {
         int databaseSizeBeforeUpdate = programRepository.findAll().size();
-
-        // Create the Program
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restProgramMockMvc.perform(put("/api/programs")
@@ -407,10 +441,12 @@ public class ProgramResourceIT {
     @Test
     @Transactional
     public void searchProgram() throws Exception {
+        // Configure the mock search repository
         // Initialize the database
         programService.save(program);
         when(mockProgramSearchRepository.search(queryStringQuery("id:" + program.getId()), PageRequest.of(0, 20)))
             .thenReturn(new PageImpl<>(Collections.singletonList(program), PageRequest.of(0, 1), 1));
+
         // Search the program
         restProgramMockMvc.perform(get("/api/_search/programs?query=id:" + program.getId()))
             .andExpect(status().isOk())
@@ -431,6 +467,10 @@ public class ProgramResourceIT {
             .andExpect(jsonPath("$.[*].recieptNumber").value(hasItem(DEFAULT_RECIEPT_NUMBER.intValue())))
             .andExpect(jsonPath("$.[*].remark").value(hasItem(DEFAULT_REMARK)))
             .andExpect(jsonPath("$.[*].bookingDate").value(hasItem(DEFAULT_BOOKING_DATE.toString())))
-            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())));
+            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())))
+            .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())))
+            .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
+            .andExpect(jsonPath("$.[*].lastModifiedDate").value(hasItem(DEFAULT_LAST_MODIFIED_DATE.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)));
     }
 }
