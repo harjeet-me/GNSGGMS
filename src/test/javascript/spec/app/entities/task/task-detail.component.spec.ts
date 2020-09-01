@@ -16,7 +16,7 @@ describe('Component Tests', () => {
       TestBed.configureTestingModule({
         imports: [GnsggmsTestModule],
         declarations: [TaskDetailComponent],
-        providers: [{ provide: ActivatedRoute, useValue: route }]
+        providers: [{ provide: ActivatedRoute, useValue: route }],
       })
         .overrideTemplate(TaskDetailComponent, '')
         .compileComponents();

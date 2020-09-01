@@ -6,7 +6,7 @@ import { ISevadar } from 'app/shared/model/sevadar.model';
 import { SevadarService } from './sevadar.service';
 
 @Component({
-  templateUrl: './sevadar-delete-dialog.component.html'
+  templateUrl: './sevadar-delete-dialog.component.html',
 })
 export class SevadarDeleteDialogComponent {
   sevadar?: ISevadar;

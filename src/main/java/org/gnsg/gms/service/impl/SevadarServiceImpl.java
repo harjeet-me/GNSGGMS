@@ -61,6 +61,7 @@ public class SevadarServiceImpl implements SevadarService {
         return sevadarRepository.findAll(pageable);
     }
 
+
     /**
      * Get one sevadar by id.
      *
@@ -82,6 +83,7 @@ public class SevadarServiceImpl implements SevadarService {
     @Override
     public void delete(Long id) {
         log.debug("Request to delete Sevadar : {}", id);
+
         sevadarRepository.deleteById(id);
         sevadarSearchRepository.deleteById(id);
     }

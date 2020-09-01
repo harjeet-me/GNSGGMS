@@ -1,0 +1,133 @@
+package org.gnsg.gms.web.rest;
+
+import org.gnsg.gms.domain.ASPath;
+import org.gnsg.gms.service.ASPathService;
+import org.gnsg.gms.web.rest.errors.BadRequestAlertException;
+
+import io.github.jhipster.web.util.HeaderUtil;
+import io.github.jhipster.web.util.ResponseUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.StreamSupport;
+
+import static org.elasticsearch.index.query.QueryBuilders.*;
+
+/**
+ * REST controller for managing {@link org.gnsg.gms.domain.ASPath}.
+ */
+@RestController
+@RequestMapping("/api")
+public class ASPathResource {
+
+    private final Logger log = LoggerFactory.getLogger(ASPathResource.class);
+
+    private static final String ENTITY_NAME = "aSPath";
+
+    @Value("${jhipster.clientApp.name}")
+    private String applicationName;
+
+    private final ASPathService aSPathService;
+
+    public ASPathResource(ASPathService aSPathService) {
+        this.aSPathService = aSPathService;
+    }
+
+    /**
+     * {@code POST  /as-paths} : Create a new aSPath.
+     *
+     * @param aSPath the aSPath to create.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new aSPath, or with status {@code 400 (Bad Request)} if the aSPath has already an ID.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     */
+    @PostMapping("/as-paths")
+    public ResponseEntity<ASPath> createASPath(@RequestBody ASPath aSPath) throws URISyntaxException {
+        log.debug("REST request to save ASPath : {}", aSPath);
+        if (aSPath.getId() != null) {
+            throw new BadRequestAlertException("A new aSPath cannot already have an ID", ENTITY_NAME, "idexists");
+        }
+        ASPath result = aSPathService.save(aSPath);
+        return ResponseEntity.created(new URI("/api/as-paths/" + result.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
+            .body(result);
+    }
+
+    /**
+     * {@code PUT  /as-paths} : Updates an existing aSPath.
+     *
+     * @param aSPath the aSPath to update.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated aSPath,
+     * or with status {@code 400 (Bad Request)} if the aSPath is not valid,
+     * or with status {@code 500 (Internal Server Error)} if the aSPath couldn't be updated.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     */
+    @PutMapping("/as-paths")
+    public ResponseEntity<ASPath> updateASPath(@RequestBody ASPath aSPath) throws URISyntaxException {
+        log.debug("REST request to update ASPath : {}", aSPath);
+        if (aSPath.getId() == null) {
+            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
+        }
+        ASPath result = aSPathService.save(aSPath);
+        return ResponseEntity.ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, aSPath.getId().toString()))
+            .body(result);
+    }
+
+    /**
+     * {@code GET  /as-paths} : get all the aSPaths.
+     *
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of aSPaths in body.
+     */
+    @GetMapping("/as-paths")
+    public List<ASPath> getAllASPaths() {
+        log.debug("REST request to get all ASPaths");
+        return aSPathService.findAll();
+    }
+
+    /**
+     * {@code GET  /as-paths/:id} : get the "id" aSPath.
+     *
+     * @param id the id of the aSPath to retrieve.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the aSPath, or with status {@code 404 (Not Found)}.
+     */
+    @GetMapping("/as-paths/{id}")
+    public ResponseEntity<ASPath> getASPath(@PathVariable Long id) {
+        log.debug("REST request to get ASPath : {}", id);
+        Optional<ASPath> aSPath = aSPathService.findOne(id);
+        return ResponseUtil.wrapOrNotFound(aSPath);
+    }
+
+    /**
+     * {@code DELETE  /as-paths/:id} : delete the "id" aSPath.
+     *
+     * @param id the id of the aSPath to delete.
+     * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
+     */
+    @DeleteMapping("/as-paths/{id}")
+    public ResponseEntity<Void> deleteASPath(@PathVariable Long id) {
+        log.debug("REST request to delete ASPath : {}", id);
+
+        aSPathService.delete(id);
+        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
+    }
+
+    /**
+     * {@code SEARCH  /_search/as-paths?query=:query} : search for the aSPath corresponding
+     * to the query.
+     *
+     * @param query the query of the aSPath search.
+     * @return the result of the search.
+     */
+    @GetMapping("/_search/as-paths")
+    public List<ASPath> searchASPaths(@RequestParam String query) {
+        log.debug("REST request to search ASPaths for query {}", query);
+        return aSPathService.search(query);
+    }
+}

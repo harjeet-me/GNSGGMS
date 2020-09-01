@@ -72,6 +72,22 @@
                 <dd>
                     <span jhiTranslate="{{ 'gnsggmsApp.EventStatus.' + program.status }}">{{ program.status }}</span>
                 </dd>
+                <dt><span jhiTranslate="gnsggmsApp.program.createdDate">Created Date</span></dt>
+                <dd>
+                    <span>{{ program.createdDate }}</span>
+                </dd>
+                <dt><span jhiTranslate="gnsggmsApp.program.createdBy">Created By</span></dt>
+                <dd>
+                    <span>{{ program.createdBy }}</span>
+                </dd>
+                <dt><span jhiTranslate="gnsggmsApp.program.lastModifiedDate">Last Modified Date</span></dt>
+                <dd>
+                    <span>{{ program.lastModifiedDate }}</span>
+                </dd>
+                <dt><span jhiTranslate="gnsggmsApp.program.lastModifiedBy">Last Modified By</span></dt>
+                <dd>
+                    <span>{{ program.lastModifiedBy }}</span>
+                </dd>
                 <dt><span jhiTranslate="gnsggmsApp.program.sevadar">Sevadar</span></dt>
                 <dd>
                     <div *ngIf="program.sevadar">

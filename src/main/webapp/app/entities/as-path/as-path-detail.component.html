@@ -1,0 +1,78 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="aSPath">
+            <h2><span jhiTranslate="gnsggmsApp.aSPath.detail.title">AS Path</span> {{ aSPath.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="gnsggmsApp.aSPath.family">Family</span></dt>
+                <dd>
+                    <span>{{ aSPath.family }}</span>
+                </dd>
+                <dt><span jhiTranslate="gnsggmsApp.aSPath.phoneNumber">Phone Number</span></dt>
+                <dd>
+                    <span>{{ aSPath.phoneNumber }}</span>
+                </dd>
+                <dt><span jhiTranslate="gnsggmsApp.aSPath.address">Address</span></dt>
+                <dd>
+                    <span>{{ aSPath.address }}</span>
+                </dd>
+                <dt><span jhiTranslate="gnsggmsApp.aSPath.startDate">Start Date</span></dt>
+                <dd>
+                    <span>{{ aSPath.startDate }}</span>
+                </dd>
+                <dt><span jhiTranslate="gnsggmsApp.aSPath.endDate">End Date</span></dt>
+                <dd>
+                    <span>{{ aSPath.endDate }}</span>
+                </dd>
+                <dt><span jhiTranslate="gnsggmsApp.aSPath.remark">Remark</span></dt>
+                <dd>
+                    <span>{{ aSPath.remark }}</span>
+                </dd>
+                <dt><span jhiTranslate="gnsggmsApp.aSPath.bookingDate">Booking Date</span></dt>
+                <dd>
+                    <span>{{ aSPath.bookingDate }}</span>
+                </dd>
+                <dt><span jhiTranslate="gnsggmsApp.aSPath.desc">Desc</span></dt>
+                <dd>
+                    <span>{{ aSPath.desc }}</span>
+                </dd>
+                <dt><span jhiTranslate="gnsggmsApp.aSPath.status">Status</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'gnsggmsApp.EventStatus.' + aSPath.status }}">{{ aSPath.status }}</span>
+                </dd>
+                <dt><span jhiTranslate="gnsggmsApp.aSPath.createdDate">Created Date</span></dt>
+                <dd>
+                    <span>{{ aSPath.createdDate }}</span>
+                </dd>
+                <dt><span jhiTranslate="gnsggmsApp.aSPath.createdBy">Created By</span></dt>
+                <dd>
+                    <span>{{ aSPath.createdBy }}</span>
+                </dd>
+                <dt><span jhiTranslate="gnsggmsApp.aSPath.lastModifiedDate">Last Modified Date</span></dt>
+                <dd>
+                    <span>{{ aSPath.lastModifiedDate }}</span>
+                </dd>
+                <dt><span jhiTranslate="gnsggmsApp.aSPath.lastModifiedBy">Last Modified By</span></dt>
+                <dd>
+                    <span>{{ aSPath.lastModifiedBy }}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/as-path', aSPath.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

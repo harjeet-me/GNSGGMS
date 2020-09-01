@@ -11,6 +11,6 @@ import { sevadarRoute } from './sevadar.route';
 @NgModule({
   imports: [GnsggmsSharedModule, RouterModule.forChild(sevadarRoute)],
   declarations: [SevadarComponent, SevadarDetailComponent, SevadarUpdateComponent, SevadarDeleteDialogComponent],
-  entryComponents: [SevadarDeleteDialogComponent]
+  entryComponents: [SevadarDeleteDialogComponent],
 })
 export class GnsggmsSevadarModule {}

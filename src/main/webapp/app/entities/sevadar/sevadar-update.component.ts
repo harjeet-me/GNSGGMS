@@ -12,7 +12,7 @@ import { SevadarService } from './sevadar.service';
 
 @Component({
   selector: 'jhi-sevadar-update',
-  templateUrl: './sevadar-update.component.html'
+  templateUrl: './sevadar-update.component.html',
 })
 export class SevadarUpdateComponent implements OnInit {
   isSaving = false;
@@ -22,9 +22,14 @@ export class SevadarUpdateComponent implements OnInit {
     name: [],
     email: [],
     phoneNumber: [],
+    address: [],
     sevaStartDate: [],
     sevaEndDate: [],
-    isValid: []
+    isValid: [],
+    createdDate: [],
+    createdBy: [],
+    lastModifiedDate: [],
+    lastModifiedBy: [],
   });
 
   constructor(protected sevadarService: SevadarService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
@@ -35,6 +40,8 @@ export class SevadarUpdateComponent implements OnInit {
         const today = moment().startOf('day');
         sevadar.sevaStartDate = today;
         sevadar.sevaEndDate = today;
+        sevadar.createdDate = today;
+        sevadar.lastModifiedDate = today;
       }
 
       this.updateForm(sevadar);
@@ -47,9 +54,14 @@ export class SevadarUpdateComponent implements OnInit {
       name: sevadar.name,
       email: sevadar.email,
       phoneNumber: sevadar.phoneNumber,
+      address: sevadar.address,
       sevaStartDate: sevadar.sevaStartDate ? sevadar.sevaStartDate.format(DATE_TIME_FORMAT) : null,
       sevaEndDate: sevadar.sevaEndDate ? sevadar.sevaEndDate.format(DATE_TIME_FORMAT) : null,
-      isValid: sevadar.isValid
+      isValid: sevadar.isValid,
+      createdDate: sevadar.createdDate ? sevadar.createdDate.format(DATE_TIME_FORMAT) : null,
+      createdBy: sevadar.createdBy,
+      lastModifiedDate: sevadar.lastModifiedDate ? sevadar.lastModifiedDate.format(DATE_TIME_FORMAT) : null,
+      lastModifiedBy: sevadar.lastModifiedBy,
     });
   }
 
@@ -74,13 +86,22 @@ export class SevadarUpdateComponent implements OnInit {
       name: this.editForm.get(['name'])!.value,
       email: this.editForm.get(['email'])!.value,
       phoneNumber: this.editForm.get(['phoneNumber'])!.value,
+      address: this.editForm.get(['address'])!.value,
       sevaStartDate: this.editForm.get(['sevaStartDate'])!.value
         ? moment(this.editForm.get(['sevaStartDate'])!.value, DATE_TIME_FORMAT)
         : undefined,
       sevaEndDate: this.editForm.get(['sevaEndDate'])!.value
         ? moment(this.editForm.get(['sevaEndDate'])!.value, DATE_TIME_FORMAT)
         : undefined,
-      isValid: this.editForm.get(['isValid'])!.value
+      isValid: this.editForm.get(['isValid'])!.value,
+      createdDate: this.editForm.get(['createdDate'])!.value
+        ? moment(this.editForm.get(['createdDate'])!.value, DATE_TIME_FORMAT)
+        : undefined,
+      createdBy: this.editForm.get(['createdBy'])!.value,
+      lastModifiedDate: this.editForm.get(['lastModifiedDate'])!.value
+        ? moment(this.editForm.get(['lastModifiedDate'])!.value, DATE_TIME_FORMAT)
+        : undefined,
+      lastModifiedBy: this.editForm.get(['lastModifiedBy'])!.value,
     };
   }
 

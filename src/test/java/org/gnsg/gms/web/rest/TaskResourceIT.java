@@ -109,7 +109,6 @@ public class TaskResourceIT {
     @Transactional
     public void createTask() throws Exception {
         int databaseSizeBeforeCreate = taskRepository.findAll().size();
-
         // Create the Task
         restTaskMockMvc.perform(post("/api/tasks")
             .contentType(MediaType.APPLICATION_JSON)
@@ -182,7 +181,6 @@ public class TaskResourceIT {
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
             .andExpect(jsonPath("$.taskTime").value(DEFAULT_TASK_TIME.toString()));
     }
-
     @Test
     @Transactional
     public void getNonExistingTask() throws Exception {
@@ -196,8 +194,6 @@ public class TaskResourceIT {
     public void updateTask() throws Exception {
         // Initialize the database
         taskService.save(task);
-        // As the test used the service layer, reset the Elasticsearch mock repository
-        reset(mockTaskSearchRepository);
 
         int databaseSizeBeforeUpdate = taskRepository.findAll().size();
 
@@ -224,15 +220,13 @@ public class TaskResourceIT {
         assertThat(testTask.getTaskTime()).isEqualTo(UPDATED_TASK_TIME);
 
         // Validate the Task in Elasticsearch
-        verify(mockTaskSearchRepository, times(1)).save(testTask);
+        verify(mockTaskSearchRepository, times(2)).save(testTask);
     }
 
     @Test
     @Transactional
     public void updateNonExistingTask() throws Exception {
         int databaseSizeBeforeUpdate = taskRepository.findAll().size();
-
-        // Create the Task
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restTaskMockMvc.perform(put("/api/tasks")
@@ -272,10 +266,12 @@ public class TaskResourceIT {
     @Test
     @Transactional
     public void searchTask() throws Exception {
+        // Configure the mock search repository
         // Initialize the database
         taskService.save(task);
         when(mockTaskSearchRepository.search(queryStringQuery("id:" + task.getId()), PageRequest.of(0, 20)))
             .thenReturn(new PageImpl<>(Collections.singletonList(task), PageRequest.of(0, 1), 1));
+
         // Search the task
         restTaskMockMvc.perform(get("/api/_search/tasks?query=id:" + task.getId()))
             .andExpect(status().isOk())

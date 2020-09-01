@@ -9,7 +9,6 @@ import javax.persistence.*;
 
 import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
-import java.util.Objects;
 import java.math.BigDecimal;
 import java.time.Instant;
 
@@ -27,7 +26,7 @@ import org.gnsg.gms.domain.enumeration.EventStatus;
 @ApiModel(description = "not an ignored comment")
 @Entity
 @Table(name = "program")
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @org.springframework.data.elasticsearch.annotations.Document(indexName = "program")
 public class Program implements Serializable {
 
@@ -89,11 +88,23 @@ public class Program implements Serializable {
     @Column(name = "status")
     private EventStatus status;
 
+    @Column(name = "created_date")
+    private Instant createdDate;
+
+    @Column(name = "created_by")
+    private String createdBy;
+
+    @Column(name = "last_modified_date")
+    private Instant lastModifiedDate;
+
+    @Column(name = "last_modified_by")
+    private String lastModifiedBy;
+
     @ManyToOne
-    @JsonIgnoreProperties("programs")
+    @JsonIgnoreProperties(value = "programs", allowSetters = true)
     private Sevadar sevadar;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+    // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
     }
@@ -310,6 +321,58 @@ public class Program implements Serializable {
         this.status = status;
     }
 
+    public Instant getCreatedDate() {
+        return createdDate;
+    }
+
+    public Program createdDate(Instant createdDate) {
+        this.createdDate = createdDate;
+        return this;
+    }
+
+    public void setCreatedDate(Instant createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public Program createdBy(String createdBy) {
+        this.createdBy = createdBy;
+        return this;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public Instant getLastModifiedDate() {
+        return lastModifiedDate;
+    }
+
+    public Program lastModifiedDate(Instant lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
+        return this;
+    }
+
+    public void setLastModifiedDate(Instant lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
+    }
+
+    public String getLastModifiedBy() {
+        return lastModifiedBy;
+    }
+
+    public Program lastModifiedBy(String lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
+        return this;
+    }
+
+    public void setLastModifiedBy(String lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
+    }
+
     public Sevadar getSevadar() {
         return sevadar;
     }
@@ -322,7 +385,7 @@ public class Program implements Serializable {
     public void setSevadar(Sevadar sevadar) {
         this.sevadar = sevadar;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
     public boolean equals(Object o) {
@@ -340,6 +403,7 @@ public class Program implements Serializable {
         return 31;
     }
 
+    // prettier-ignore
     @Override
     public String toString() {
         return "Program{" +
@@ -360,6 +424,10 @@ public class Program implements Serializable {
             ", remark='" + getRemark() + "'" +
             ", bookingDate='" + getBookingDate() + "'" +
             ", status='" + getStatus() + "'" +
+            ", createdDate='" + getCreatedDate() + "'" +
+            ", createdBy='" + getCreatedBy() + "'" +
+            ", lastModifiedDate='" + getLastModifiedDate() + "'" +
+            ", lastModifiedBy='" + getLastModifiedBy() + "'" +
             "}";
     }
 }

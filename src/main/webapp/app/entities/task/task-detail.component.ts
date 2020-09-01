@@ -5,7 +5,7 @@ import { ITask } from 'app/shared/model/task.model';
 
 @Component({
   selector: 'jhi-task-detail',
-  templateUrl: './task-detail.component.html'
+  templateUrl: './task-detail.component.html',
 })
 export class TaskDetailComponent implements OnInit {
   task: ITask | null = null;

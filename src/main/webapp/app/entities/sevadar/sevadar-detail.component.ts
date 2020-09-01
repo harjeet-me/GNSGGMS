@@ -5,7 +5,7 @@ import { ISevadar } from 'app/shared/model/sevadar.model';
 
 @Component({
   selector: 'jhi-sevadar-detail',
-  templateUrl: './sevadar-detail.component.html'
+  templateUrl: './sevadar-detail.component.html',
 })
 export class SevadarDetailComponent implements OnInit {
   sevadar: ISevadar | null = null;

@@ -51,6 +51,9 @@ public class SevadarResourceIT {
     private static final String DEFAULT_PHONE_NUMBER = "AAAAAAAAAA";
     private static final String UPDATED_PHONE_NUMBER = "BBBBBBBBBB";
 
+    private static final String DEFAULT_ADDRESS = "AAAAAAAAAA";
+    private static final String UPDATED_ADDRESS = "BBBBBBBBBB";
+
     private static final Instant DEFAULT_SEVA_START_DATE = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_SEVA_START_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
@@ -59,6 +62,18 @@ public class SevadarResourceIT {
 
     private static final Boolean DEFAULT_IS_VALID = false;
     private static final Boolean UPDATED_IS_VALID = true;
+
+    private static final Instant DEFAULT_CREATED_DATE = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_CREATED_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+
+    private static final String DEFAULT_CREATED_BY = "AAAAAAAAAA";
+    private static final String UPDATED_CREATED_BY = "BBBBBBBBBB";
+
+    private static final Instant DEFAULT_LAST_MODIFIED_DATE = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_LAST_MODIFIED_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+
+    private static final String DEFAULT_LAST_MODIFIED_BY = "AAAAAAAAAA";
+    private static final String UPDATED_LAST_MODIFIED_BY = "BBBBBBBBBB";
 
     @Autowired
     private SevadarRepository sevadarRepository;
@@ -93,9 +108,14 @@ public class SevadarResourceIT {
             .name(DEFAULT_NAME)
             .email(DEFAULT_EMAIL)
             .phoneNumber(DEFAULT_PHONE_NUMBER)
+            .address(DEFAULT_ADDRESS)
             .sevaStartDate(DEFAULT_SEVA_START_DATE)
             .sevaEndDate(DEFAULT_SEVA_END_DATE)
-            .isValid(DEFAULT_IS_VALID);
+            .isValid(DEFAULT_IS_VALID)
+            .createdDate(DEFAULT_CREATED_DATE)
+            .createdBy(DEFAULT_CREATED_BY)
+            .lastModifiedDate(DEFAULT_LAST_MODIFIED_DATE)
+            .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY);
         return sevadar;
     }
     /**
@@ -109,9 +129,14 @@ public class SevadarResourceIT {
             .name(UPDATED_NAME)
             .email(UPDATED_EMAIL)
             .phoneNumber(UPDATED_PHONE_NUMBER)
+            .address(UPDATED_ADDRESS)
             .sevaStartDate(UPDATED_SEVA_START_DATE)
             .sevaEndDate(UPDATED_SEVA_END_DATE)
-            .isValid(UPDATED_IS_VALID);
+            .isValid(UPDATED_IS_VALID)
+            .createdDate(UPDATED_CREATED_DATE)
+            .createdBy(UPDATED_CREATED_BY)
+            .lastModifiedDate(UPDATED_LAST_MODIFIED_DATE)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
         return sevadar;
     }
 
@@ -124,7 +149,6 @@ public class SevadarResourceIT {
     @Transactional
     public void createSevadar() throws Exception {
         int databaseSizeBeforeCreate = sevadarRepository.findAll().size();
-
         // Create the Sevadar
         restSevadarMockMvc.perform(post("/api/sevadars")
             .contentType(MediaType.APPLICATION_JSON)
@@ -138,9 +162,14 @@ public class SevadarResourceIT {
         assertThat(testSevadar.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testSevadar.getEmail()).isEqualTo(DEFAULT_EMAIL);
         assertThat(testSevadar.getPhoneNumber()).isEqualTo(DEFAULT_PHONE_NUMBER);
+        assertThat(testSevadar.getAddress()).isEqualTo(DEFAULT_ADDRESS);
         assertThat(testSevadar.getSevaStartDate()).isEqualTo(DEFAULT_SEVA_START_DATE);
         assertThat(testSevadar.getSevaEndDate()).isEqualTo(DEFAULT_SEVA_END_DATE);
         assertThat(testSevadar.isIsValid()).isEqualTo(DEFAULT_IS_VALID);
+        assertThat(testSevadar.getCreatedDate()).isEqualTo(DEFAULT_CREATED_DATE);
+        assertThat(testSevadar.getCreatedBy()).isEqualTo(DEFAULT_CREATED_BY);
+        assertThat(testSevadar.getLastModifiedDate()).isEqualTo(DEFAULT_LAST_MODIFIED_DATE);
+        assertThat(testSevadar.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
 
         // Validate the Sevadar in Elasticsearch
         verify(mockSevadarSearchRepository, times(1)).save(testSevadar);
@@ -183,9 +212,14 @@ public class SevadarResourceIT {
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL)))
             .andExpect(jsonPath("$.[*].phoneNumber").value(hasItem(DEFAULT_PHONE_NUMBER)))
+            .andExpect(jsonPath("$.[*].address").value(hasItem(DEFAULT_ADDRESS)))
             .andExpect(jsonPath("$.[*].sevaStartDate").value(hasItem(DEFAULT_SEVA_START_DATE.toString())))
             .andExpect(jsonPath("$.[*].sevaEndDate").value(hasItem(DEFAULT_SEVA_END_DATE.toString())))
-            .andExpect(jsonPath("$.[*].isValid").value(hasItem(DEFAULT_IS_VALID.booleanValue())));
+            .andExpect(jsonPath("$.[*].isValid").value(hasItem(DEFAULT_IS_VALID.booleanValue())))
+            .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())))
+            .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
+            .andExpect(jsonPath("$.[*].lastModifiedDate").value(hasItem(DEFAULT_LAST_MODIFIED_DATE.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)));
     }
     
     @Test
@@ -202,11 +236,15 @@ public class SevadarResourceIT {
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL))
             .andExpect(jsonPath("$.phoneNumber").value(DEFAULT_PHONE_NUMBER))
+            .andExpect(jsonPath("$.address").value(DEFAULT_ADDRESS))
             .andExpect(jsonPath("$.sevaStartDate").value(DEFAULT_SEVA_START_DATE.toString()))
             .andExpect(jsonPath("$.sevaEndDate").value(DEFAULT_SEVA_END_DATE.toString()))
-            .andExpect(jsonPath("$.isValid").value(DEFAULT_IS_VALID.booleanValue()));
+            .andExpect(jsonPath("$.isValid").value(DEFAULT_IS_VALID.booleanValue()))
+            .andExpect(jsonPath("$.createdDate").value(DEFAULT_CREATED_DATE.toString()))
+            .andExpect(jsonPath("$.createdBy").value(DEFAULT_CREATED_BY))
+            .andExpect(jsonPath("$.lastModifiedDate").value(DEFAULT_LAST_MODIFIED_DATE.toString()))
+            .andExpect(jsonPath("$.lastModifiedBy").value(DEFAULT_LAST_MODIFIED_BY));
     }
-
     @Test
     @Transactional
     public void getNonExistingSevadar() throws Exception {
@@ -220,8 +258,6 @@ public class SevadarResourceIT {
     public void updateSevadar() throws Exception {
         // Initialize the database
         sevadarService.save(sevadar);
-        // As the test used the service layer, reset the Elasticsearch mock repository
-        reset(mockSevadarSearchRepository);
 
         int databaseSizeBeforeUpdate = sevadarRepository.findAll().size();
 
@@ -233,9 +269,14 @@ public class SevadarResourceIT {
             .name(UPDATED_NAME)
             .email(UPDATED_EMAIL)
             .phoneNumber(UPDATED_PHONE_NUMBER)
+            .address(UPDATED_ADDRESS)
             .sevaStartDate(UPDATED_SEVA_START_DATE)
             .sevaEndDate(UPDATED_SEVA_END_DATE)
-            .isValid(UPDATED_IS_VALID);
+            .isValid(UPDATED_IS_VALID)
+            .createdDate(UPDATED_CREATED_DATE)
+            .createdBy(UPDATED_CREATED_BY)
+            .lastModifiedDate(UPDATED_LAST_MODIFIED_DATE)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
 
         restSevadarMockMvc.perform(put("/api/sevadars")
             .contentType(MediaType.APPLICATION_JSON)
@@ -249,20 +290,23 @@ public class SevadarResourceIT {
         assertThat(testSevadar.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testSevadar.getEmail()).isEqualTo(UPDATED_EMAIL);
         assertThat(testSevadar.getPhoneNumber()).isEqualTo(UPDATED_PHONE_NUMBER);
+        assertThat(testSevadar.getAddress()).isEqualTo(UPDATED_ADDRESS);
         assertThat(testSevadar.getSevaStartDate()).isEqualTo(UPDATED_SEVA_START_DATE);
         assertThat(testSevadar.getSevaEndDate()).isEqualTo(UPDATED_SEVA_END_DATE);
         assertThat(testSevadar.isIsValid()).isEqualTo(UPDATED_IS_VALID);
+        assertThat(testSevadar.getCreatedDate()).isEqualTo(UPDATED_CREATED_DATE);
+        assertThat(testSevadar.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
+        assertThat(testSevadar.getLastModifiedDate()).isEqualTo(UPDATED_LAST_MODIFIED_DATE);
+        assertThat(testSevadar.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
 
         // Validate the Sevadar in Elasticsearch
-        verify(mockSevadarSearchRepository, times(1)).save(testSevadar);
+        verify(mockSevadarSearchRepository, times(2)).save(testSevadar);
     }
 
     @Test
     @Transactional
     public void updateNonExistingSevadar() throws Exception {
         int databaseSizeBeforeUpdate = sevadarRepository.findAll().size();
-
-        // Create the Sevadar
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restSevadarMockMvc.perform(put("/api/sevadars")
@@ -302,10 +346,12 @@ public class SevadarResourceIT {
     @Test
     @Transactional
     public void searchSevadar() throws Exception {
+        // Configure the mock search repository
         // Initialize the database
         sevadarService.save(sevadar);
         when(mockSevadarSearchRepository.search(queryStringQuery("id:" + sevadar.getId()), PageRequest.of(0, 20)))
             .thenReturn(new PageImpl<>(Collections.singletonList(sevadar), PageRequest.of(0, 1), 1));
+
         // Search the sevadar
         restSevadarMockMvc.perform(get("/api/_search/sevadars?query=id:" + sevadar.getId()))
             .andExpect(status().isOk())
@@ -314,8 +360,13 @@ public class SevadarResourceIT {
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL)))
             .andExpect(jsonPath("$.[*].phoneNumber").value(hasItem(DEFAULT_PHONE_NUMBER)))
+            .andExpect(jsonPath("$.[*].address").value(hasItem(DEFAULT_ADDRESS)))
             .andExpect(jsonPath("$.[*].sevaStartDate").value(hasItem(DEFAULT_SEVA_START_DATE.toString())))
             .andExpect(jsonPath("$.[*].sevaEndDate").value(hasItem(DEFAULT_SEVA_END_DATE.toString())))
-            .andExpect(jsonPath("$.[*].isValid").value(hasItem(DEFAULT_IS_VALID.booleanValue())));
+            .andExpect(jsonPath("$.[*].isValid").value(hasItem(DEFAULT_IS_VALID.booleanValue())))
+            .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())))
+            .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
+            .andExpect(jsonPath("$.[*].lastModifiedDate").value(hasItem(DEFAULT_LAST_MODIFIED_DATE.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)));
     }
 }

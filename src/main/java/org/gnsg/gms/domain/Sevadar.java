@@ -9,7 +9,6 @@ import javax.persistence.*;
 
 import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
-import java.util.Objects;
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
@@ -20,7 +19,7 @@ import java.util.Set;
 @ApiModel(description = "The Employee entity.")
 @Entity
 @Table(name = "sevadar")
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @org.springframework.data.elasticsearch.annotations.Document(indexName = "sevadar")
 public class Sevadar implements Serializable {
 
@@ -43,6 +42,9 @@ public class Sevadar implements Serializable {
     @Column(name = "phone_number")
     private String phoneNumber;
 
+    @Column(name = "address")
+    private String address;
+
     @Column(name = "seva_start_date")
     private Instant sevaStartDate;
 
@@ -52,11 +54,23 @@ public class Sevadar implements Serializable {
     @Column(name = "is_valid")
     private Boolean isValid;
 
+    @Column(name = "created_date")
+    private Instant createdDate;
+
+    @Column(name = "created_by")
+    private String createdBy;
+
+    @Column(name = "last_modified_date")
+    private Instant lastModifiedDate;
+
+    @Column(name = "last_modified_by")
+    private String lastModifiedBy;
+
     @OneToMany(mappedBy = "sevadar")
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     private Set<Program> programs = new HashSet<>();
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+    // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
     }
@@ -104,6 +118,19 @@ public class Sevadar implements Serializable {
         this.phoneNumber = phoneNumber;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public Sevadar address(String address) {
+        this.address = address;
+        return this;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     public Instant getSevaStartDate() {
         return sevaStartDate;
     }
@@ -143,6 +170,58 @@ public class Sevadar implements Serializable {
         this.isValid = isValid;
     }
 
+    public Instant getCreatedDate() {
+        return createdDate;
+    }
+
+    public Sevadar createdDate(Instant createdDate) {
+        this.createdDate = createdDate;
+        return this;
+    }
+
+    public void setCreatedDate(Instant createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public Sevadar createdBy(String createdBy) {
+        this.createdBy = createdBy;
+        return this;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public Instant getLastModifiedDate() {
+        return lastModifiedDate;
+    }
+
+    public Sevadar lastModifiedDate(Instant lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
+        return this;
+    }
+
+    public void setLastModifiedDate(Instant lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
+    }
+
+    public String getLastModifiedBy() {
+        return lastModifiedBy;
+    }
+
+    public Sevadar lastModifiedBy(String lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
+        return this;
+    }
+
+    public void setLastModifiedBy(String lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
+    }
+
     public Set<Program> getPrograms() {
         return programs;
     }
@@ -167,7 +246,7 @@ public class Sevadar implements Serializable {
     public void setPrograms(Set<Program> programs) {
         this.programs = programs;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
     public boolean equals(Object o) {
@@ -185,6 +264,7 @@ public class Sevadar implements Serializable {
         return 31;
     }
 
+    // prettier-ignore
     @Override
     public String toString() {
         return "Sevadar{" +
@@ -192,9 +272,14 @@ public class Sevadar implements Serializable {
             ", name='" + getName() + "'" +
             ", email='" + getEmail() + "'" +
             ", phoneNumber='" + getPhoneNumber() + "'" +
+            ", address='" + getAddress() + "'" +
             ", sevaStartDate='" + getSevaStartDate() + "'" +
             ", sevaEndDate='" + getSevaEndDate() + "'" +
             ", isValid='" + isIsValid() + "'" +
+            ", createdDate='" + getCreatedDate() + "'" +
+            ", createdBy='" + getCreatedBy() + "'" +
+            ", lastModifiedDate='" + getLastModifiedDate() + "'" +
+            ", lastModifiedBy='" + getLastModifiedBy() + "'" +
             "}";
     }
 }

@@ -33,6 +33,10 @@
       "remark": "Remark",
       "bookingDate": "Booking Date",
       "status": "Status",
+      "createdDate": "Created Date",
+      "createdBy": "Created By",
+      "lastModifiedDate": "Last Modified Date",
+      "lastModifiedBy": "Last Modified By",
       "sevadar": "Sevadar"
     }
   }

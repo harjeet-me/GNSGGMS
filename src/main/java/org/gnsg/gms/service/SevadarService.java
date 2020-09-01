@@ -28,6 +28,7 @@ public interface SevadarService {
      */
     Page<Sevadar> findAll(Pageable pageable);
 
+
     /**
      * Get the "id" sevadar.
      *

@@ -20,7 +20,7 @@ describe('Service Tests', () => {
 
     beforeEach(() => {
       TestBed.configureTestingModule({
-        imports: [HttpClientTestingModule]
+        imports: [HttpClientTestingModule],
       });
       expectedResult = null;
       injector = getTestBed();
@@ -45,7 +45,11 @@ describe('Service Tests', () => {
         0,
         'AAAAAAA',
         currentDate,
-        EventStatus.BOOKED
+        EventStatus.BOOKED,
+        currentDate,
+        'AAAAAAA',
+        currentDate,
+        'AAAAAAA'
       );
     });
 
@@ -55,7 +59,9 @@ describe('Service Tests', () => {
           {
             etime: currentDate.format(DATE_TIME_FORMAT),
             langarTime: currentDate.format(DATE_TIME_FORMAT),
-            bookingDate: currentDate.format(DATE_TIME_FORMAT)
+            bookingDate: currentDate.format(DATE_TIME_FORMAT),
+            createdDate: currentDate.format(DATE_TIME_FORMAT),
+            lastModifiedDate: currentDate.format(DATE_TIME_FORMAT),
           },
           elemDefault
         );
@@ -73,7 +79,9 @@ describe('Service Tests', () => {
             id: 0,
             etime: currentDate.format(DATE_TIME_FORMAT),
             langarTime: currentDate.format(DATE_TIME_FORMAT),
-            bookingDate: currentDate.format(DATE_TIME_FORMAT)
+            bookingDate: currentDate.format(DATE_TIME_FORMAT),
+            createdDate: currentDate.format(DATE_TIME_FORMAT),
+            lastModifiedDate: currentDate.format(DATE_TIME_FORMAT),
           },
           elemDefault
         );
@@ -82,7 +90,9 @@ describe('Service Tests', () => {
           {
             etime: currentDate,
             langarTime: currentDate,
-            bookingDate: currentDate
+            bookingDate: currentDate,
+            createdDate: currentDate,
+            lastModifiedDate: currentDate,
           },
           returnedFromService
         );
@@ -112,7 +122,11 @@ describe('Service Tests', () => {
             recieptNumber: 1,
             remark: 'BBBBBB',
             bookingDate: currentDate.format(DATE_TIME_FORMAT),
-            status: 'BBBBBB'
+            status: 'BBBBBB',
+            createdDate: currentDate.format(DATE_TIME_FORMAT),
+            createdBy: 'BBBBBB',
+            lastModifiedDate: currentDate.format(DATE_TIME_FORMAT),
+            lastModifiedBy: 'BBBBBB',
           },
           elemDefault
         );
@@ -121,7 +135,9 @@ describe('Service Tests', () => {
           {
             etime: currentDate,
             langarTime: currentDate,
-            bookingDate: currentDate
+            bookingDate: currentDate,
+            createdDate: currentDate,
+            lastModifiedDate: currentDate,
           },
           returnedFromService
         );
@@ -151,7 +167,11 @@ describe('Service Tests', () => {
             recieptNumber: 1,
             remark: 'BBBBBB',
             bookingDate: currentDate.format(DATE_TIME_FORMAT),
-            status: 'BBBBBB'
+            status: 'BBBBBB',
+            createdDate: currentDate.format(DATE_TIME_FORMAT),
+            createdBy: 'BBBBBB',
+            lastModifiedDate: currentDate.format(DATE_TIME_FORMAT),
+            lastModifiedBy: 'BBBBBB',
           },
           elemDefault
         );
@@ -160,7 +180,9 @@ describe('Service Tests', () => {
           {
             etime: currentDate,
             langarTime: currentDate,
-            bookingDate: currentDate
+            bookingDate: currentDate,
+            createdDate: currentDate,
+            lastModifiedDate: currentDate,
           },
           returnedFromService
         );

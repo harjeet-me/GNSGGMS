@@ -122,6 +122,7 @@ public class TaskResource {
     @DeleteMapping("/tasks/{id}")
     public ResponseEntity<Void> deleteTask(@PathVariable Long id) {
         log.debug("REST request to delete Task : {}", id);
+
         taskService.delete(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
     }
@@ -140,5 +141,5 @@ public class TaskResource {
         Page<Task> page = taskService.search(query, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
-    }
+        }
 }

@@ -23,6 +23,10 @@ export interface IProgram {
   remark?: string;
   bookingDate?: Moment;
   status?: EventStatus;
+  createdDate?: Moment;
+  createdBy?: string;
+  lastModifiedDate?: Moment;
+  lastModifiedBy?: string;
   sevadar?: ISevadar;
 }
 
@@ -45,6 +49,10 @@ export class Program implements IProgram {
     public remark?: string,
     public bookingDate?: Moment,
     public status?: EventStatus,
+    public createdDate?: Moment,
+    public createdBy?: string,
+    public lastModifiedDate?: Moment,
+    public lastModifiedBy?: string,
     public sevadar?: ISevadar
   ) {
     this.withLangar = this.withLangar || false;

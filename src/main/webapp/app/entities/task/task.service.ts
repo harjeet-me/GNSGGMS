@@ -58,7 +58,7 @@ export class TaskService {
 
   protected convertDateFromClient(task: ITask): ITask {
     const copy: ITask = Object.assign({}, task, {
-      taskTime: task.taskTime && task.taskTime.isValid() ? task.taskTime.toJSON() : undefined
+      taskTime: task.taskTime && task.taskTime.isValid() ? task.taskTime.toJSON() : undefined,
     });
     return copy;
   }

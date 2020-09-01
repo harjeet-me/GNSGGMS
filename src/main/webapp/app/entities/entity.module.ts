@@ -6,30 +6,38 @@ import { RouterModule } from '@angular/router';
     RouterModule.forChild([
       {
         path: 'program',
-        loadChildren: () => import('./program/program.module').then(m => m.GnsggmsProgramModule)
+        loadChildren: () => import('./program/program.module').then(m => m.GnsggmsProgramModule),
       },
       {
         path: 'task',
-        loadChildren: () => import('./task/task.module').then(m => m.GnsggmsTaskModule)
+        loadChildren: () => import('./task/task.module').then(m => m.GnsggmsTaskModule),
       },
       {
         path: 'sevadar',
-        loadChildren: () => import('./sevadar/sevadar.module').then(m => m.GnsggmsSevadarModule)
+        loadChildren: () => import('./sevadar/sevadar.module').then(m => m.GnsggmsSevadarModule),
       },
       {
         path: 'student',
-        loadChildren: () => import('./student/student.module').then(m => m.GnsggmsStudentModule)
+        loadChildren: () => import('./student/student.module').then(m => m.GnsggmsStudentModule),
       },
       {
         path: 'charge',
-        loadChildren: () => import('./charge/charge.module').then(m => m.GnsggmsChargeModule)
+        loadChildren: () => import('./charge/charge.module').then(m => m.GnsggmsChargeModule),
       },
       {
         path: 'applied-charge',
-        loadChildren: () => import('./applied-charge/applied-charge.module').then(m => m.GnsggmsAppliedChargeModule)
-      }
+        loadChildren: () => import('./applied-charge/applied-charge.module').then(m => m.GnsggmsAppliedChargeModule),
+      },
+      {
+        path: 'as-path',
+        loadChildren: () => import('./as-path/as-path.module').then(m => m.GnsggmsASPathModule),
+      },
+      {
+        path: 'p-roul',
+        loadChildren: () => import('./p-roul/p-roul.module').then(m => m.GnsggmsPRoulModule),
+      },
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
-    ])
-  ]
+    ]),
+  ],
 })
 export class GnsggmsEntityModule {}

@@ -22,6 +22,7 @@
                         <option value="LANGAR">{{ 'gnsggmsApp.EVENTTYPE.LANGAR' | translate }}</option>
                         <option value="KIRTAN">{{ 'gnsggmsApp.EVENTTYPE.KIRTAN' | translate }}</option>
                         <option value="SEHAJ_PATH_BHOG">{{ 'gnsggmsApp.EVENTTYPE.SEHAJ_PATH_BHOG' | translate }}</option>
+                        <option value="DEG_SEVA">{{ 'gnsggmsApp.EVENTTYPE.DEG_SEVA' | translate }}</option>
                     </select>
                 </div>
 
@@ -75,6 +76,11 @@
                         <option value="SIMPLE_JALEBI_MATARPANEER">{{ 'gnsggmsApp.LANGARMENU.SIMPLE_JALEBI_MATARPANEER' | translate }}</option>
                         <option value="SIMPLE_KHEER_SHAHIPANEER">{{ 'gnsggmsApp.LANGARMENU.SIMPLE_KHEER_SHAHIPANEER' | translate }}</option>
                         <option value="SIMPLE_KHEER_MATARPANEER">{{ 'gnsggmsApp.LANGARMENU.SIMPLE_KHEER_MATARPANEER' | translate }}</option>
+                        <option value="SIMPLE_JALEBI_PALAKPANEER">{{ 'gnsggmsApp.LANGARMENU.SIMPLE_JALEBI_PALAKPANEER' | translate }}</option>
+                        <option value="SIMPLE_KHEER_PALAKPANEER">{{ 'gnsggmsApp.LANGARMENU.SIMPLE_KHEER_PALAKPANEER' | translate }}</option>
+                        <option value="PAKOURE">{{ 'gnsggmsApp.LANGARMENU.PAKOURE' | translate }}</option>
+                        <option value="JALEBI">{{ 'gnsggmsApp.LANGARMENU.JALEBI' | translate }}</option>
+                        <option value="KHEER">{{ 'gnsggmsApp.LANGARMENU.KHEER' | translate }}</option>
                     </select>
                 </div>
 
@@ -129,7 +135,34 @@
                         <option value="COMPLETED">{{ 'gnsggmsApp.EventStatus.COMPLETED' | translate }}</option>
                         <option value="CANCELLED">{{ 'gnsggmsApp.EventStatus.CANCELLED' | translate }}</option>
                         <option value="REQUESTED">{{ 'gnsggmsApp.EventStatus.REQUESTED' | translate }}</option>
+                        <option value="PAID">{{ 'gnsggmsApp.EventStatus.PAID' | translate }}</option>
                     </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gnsggmsApp.program.createdDate" for="field_createdDate">Created Date</label>
+                    <div class="d-flex">
+                        <input id="field_createdDate" type="datetime-local" class="form-control" name="createdDate" formControlName="createdDate" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gnsggmsApp.program.createdBy" for="field_createdBy">Created By</label>
+                    <input type="text" class="form-control" name="createdBy" id="field_createdBy"
+                           formControlName="createdBy"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gnsggmsApp.program.lastModifiedDate" for="field_lastModifiedDate">Last Modified Date</label>
+                    <div class="d-flex">
+                        <input id="field_lastModifiedDate" type="datetime-local" class="form-control" name="lastModifiedDate" formControlName="lastModifiedDate" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="gnsggmsApp.program.lastModifiedBy" for="field_lastModifiedBy">Last Modified By</label>
+                    <input type="text" class="form-control" name="lastModifiedBy" id="field_lastModifiedBy"
+                           formControlName="lastModifiedBy"/>
                 </div>
 
                 <div class="form-group">
