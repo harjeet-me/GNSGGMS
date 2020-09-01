@@ -5,10 +5,16 @@ import org.gnsg.gms.service.ASPathService;
 import org.gnsg.gms.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
+import io.github.jhipster.web.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -83,12 +89,15 @@ public class ASPathResource {
     /**
      * {@code GET  /as-paths} : get all the aSPaths.
      *
+     * @param pageable the pagination information.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of aSPaths in body.
      */
     @GetMapping("/as-paths")
-    public List<ASPath> getAllASPaths() {
-        log.debug("REST request to get all ASPaths");
-        return aSPathService.findAll();
+    public ResponseEntity<List<ASPath>> getAllASPaths(Pageable pageable) {
+        log.debug("REST request to get a page of ASPaths");
+        Page<ASPath> page = aSPathService.findAll(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
     /**
@@ -123,11 +132,14 @@ public class ASPathResource {
      * to the query.
      *
      * @param query the query of the aSPath search.
+     * @param pageable the pagination information.
      * @return the result of the search.
      */
     @GetMapping("/_search/as-paths")
-    public List<ASPath> searchASPaths(@RequestParam String query) {
-        log.debug("REST request to search ASPaths for query {}", query);
-        return aSPathService.search(query);
-    }
+    public ResponseEntity<List<ASPath>> searchASPaths(@RequestParam String query, Pageable pageable) {
+        log.debug("REST request to search for a page of ASPaths for query {}", query);
+        Page<ASPath> page = aSPathService.search(query, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+        }
 }

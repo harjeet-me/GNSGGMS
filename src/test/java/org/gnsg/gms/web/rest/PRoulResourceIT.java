@@ -14,6 +14,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -307,8 +309,8 @@ public class PRoulResourceIT {
         // Configure the mock search repository
         // Initialize the database
         pRoulService.save(pRoul);
-        when(mockPRoulSearchRepository.search(queryStringQuery("id:" + pRoul.getId())))
-            .thenReturn(Collections.singletonList(pRoul));
+        when(mockPRoulSearchRepository.search(queryStringQuery("id:" + pRoul.getId()), PageRequest.of(0, 20)))
+            .thenReturn(new PageImpl<>(Collections.singletonList(pRoul), PageRequest.of(0, 1), 1));
 
         // Search the pRoul
         restPRoulMockMvc.perform(get("/api/_search/p-rouls?query=id:" + pRoul.getId()))

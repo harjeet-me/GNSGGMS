@@ -51,7 +51,7 @@
   "changelogDate": "20200901210933",
   "entityTableName": "p_roul",
   "dto": "no",
-  "pagination": "no",
+  "pagination": "pagination",
   "service": "serviceImpl",
   "jpaMetamodelFiltering": false,
   "fluentMethods": true,

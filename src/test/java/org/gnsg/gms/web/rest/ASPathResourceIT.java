@@ -14,6 +14,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -33,6 +35,7 @@ import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import org.gnsg.gms.domain.enumeration.PATHTYPE;
 import org.gnsg.gms.domain.enumeration.EventStatus;
 /**
  * Integration tests for the {@link ASPathResource} REST controller.
@@ -42,6 +45,9 @@ import org.gnsg.gms.domain.enumeration.EventStatus;
 @AutoConfigureMockMvc
 @WithMockUser
 public class ASPathResourceIT {
+
+    private static final PATHTYPE DEFAULT_PATH = PATHTYPE.AKHAND_PATH;
+    private static final PATHTYPE UPDATED_PATH = PATHTYPE.SEHAJ_PATH;
 
     private static final String DEFAULT_FAMILY = "AAAAAAAAAA";
     private static final String UPDATED_FAMILY = "BBBBBBBBBB";
@@ -112,6 +118,7 @@ public class ASPathResourceIT {
      */
     public static ASPath createEntity(EntityManager em) {
         ASPath aSPath = new ASPath()
+            .path(DEFAULT_PATH)
             .family(DEFAULT_FAMILY)
             .phoneNumber(DEFAULT_PHONE_NUMBER)
             .address(DEFAULT_ADDRESS)
@@ -135,6 +142,7 @@ public class ASPathResourceIT {
      */
     public static ASPath createUpdatedEntity(EntityManager em) {
         ASPath aSPath = new ASPath()
+            .path(UPDATED_PATH)
             .family(UPDATED_FAMILY)
             .phoneNumber(UPDATED_PHONE_NUMBER)
             .address(UPDATED_ADDRESS)
@@ -170,6 +178,7 @@ public class ASPathResourceIT {
         List<ASPath> aSPathList = aSPathRepository.findAll();
         assertThat(aSPathList).hasSize(databaseSizeBeforeCreate + 1);
         ASPath testASPath = aSPathList.get(aSPathList.size() - 1);
+        assertThat(testASPath.getPath()).isEqualTo(DEFAULT_PATH);
         assertThat(testASPath.getFamily()).isEqualTo(DEFAULT_FAMILY);
         assertThat(testASPath.getPhoneNumber()).isEqualTo(DEFAULT_PHONE_NUMBER);
         assertThat(testASPath.getAddress()).isEqualTo(DEFAULT_ADDRESS);
@@ -222,6 +231,7 @@ public class ASPathResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(aSPath.getId().intValue())))
+            .andExpect(jsonPath("$.[*].path").value(hasItem(DEFAULT_PATH.toString())))
             .andExpect(jsonPath("$.[*].family").value(hasItem(DEFAULT_FAMILY)))
             .andExpect(jsonPath("$.[*].phoneNumber").value(hasItem(DEFAULT_PHONE_NUMBER)))
             .andExpect(jsonPath("$.[*].address").value(hasItem(DEFAULT_ADDRESS)))
@@ -248,6 +258,7 @@ public class ASPathResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(aSPath.getId().intValue()))
+            .andExpect(jsonPath("$.path").value(DEFAULT_PATH.toString()))
             .andExpect(jsonPath("$.family").value(DEFAULT_FAMILY))
             .andExpect(jsonPath("$.phoneNumber").value(DEFAULT_PHONE_NUMBER))
             .andExpect(jsonPath("$.address").value(DEFAULT_ADDRESS))
@@ -283,6 +294,7 @@ public class ASPathResourceIT {
         // Disconnect from session so that the updates on updatedASPath are not directly saved in db
         em.detach(updatedASPath);
         updatedASPath
+            .path(UPDATED_PATH)
             .family(UPDATED_FAMILY)
             .phoneNumber(UPDATED_PHONE_NUMBER)
             .address(UPDATED_ADDRESS)
@@ -306,6 +318,7 @@ public class ASPathResourceIT {
         List<ASPath> aSPathList = aSPathRepository.findAll();
         assertThat(aSPathList).hasSize(databaseSizeBeforeUpdate);
         ASPath testASPath = aSPathList.get(aSPathList.size() - 1);
+        assertThat(testASPath.getPath()).isEqualTo(UPDATED_PATH);
         assertThat(testASPath.getFamily()).isEqualTo(UPDATED_FAMILY);
         assertThat(testASPath.getPhoneNumber()).isEqualTo(UPDATED_PHONE_NUMBER);
         assertThat(testASPath.getAddress()).isEqualTo(UPDATED_ADDRESS);
@@ -370,14 +383,15 @@ public class ASPathResourceIT {
         // Configure the mock search repository
         // Initialize the database
         aSPathService.save(aSPath);
-        when(mockASPathSearchRepository.search(queryStringQuery("id:" + aSPath.getId())))
-            .thenReturn(Collections.singletonList(aSPath));
+        when(mockASPathSearchRepository.search(queryStringQuery("id:" + aSPath.getId()), PageRequest.of(0, 20)))
+            .thenReturn(new PageImpl<>(Collections.singletonList(aSPath), PageRequest.of(0, 1), 1));
 
         // Search the aSPath
         restASPathMockMvc.perform(get("/api/_search/as-paths?query=id:" + aSPath.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(aSPath.getId().intValue())))
+            .andExpect(jsonPath("$.[*].path").value(hasItem(DEFAULT_PATH.toString())))
             .andExpect(jsonPath("$.[*].family").value(hasItem(DEFAULT_FAMILY)))
             .andExpect(jsonPath("$.[*].phoneNumber").value(hasItem(DEFAULT_PHONE_NUMBER)))
             .andExpect(jsonPath("$.[*].address").value(hasItem(DEFAULT_ADDRESS)))

@@ -4,6 +4,7 @@ import * as moment from 'moment';
 import { DATE_FORMAT, DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { ASPathService } from 'app/entities/as-path/as-path.service';
 import { IASPath, ASPath } from 'app/shared/model/as-path.model';
+import { PATHTYPE } from 'app/shared/model/enumerations/pathtype.model';
 import { EventStatus } from 'app/shared/model/enumerations/event-status.model';
 
 describe('Service Tests', () => {
@@ -27,6 +28,7 @@ describe('Service Tests', () => {
 
       elemDefault = new ASPath(
         0,
+        PATHTYPE.AKHAND_PATH,
         'AAAAAAA',
         'AAAAAAA',
         'AAAAAAA',
@@ -97,6 +99,7 @@ describe('Service Tests', () => {
       it('should update a ASPath', () => {
         const returnedFromService = Object.assign(
           {
+            path: 'BBBBBB',
             family: 'BBBBBB',
             phoneNumber: 'BBBBBB',
             address: 'BBBBBB',
@@ -135,6 +138,7 @@ describe('Service Tests', () => {
       it('should return a list of ASPath', () => {
         const returnedFromService = Object.assign(
           {
+            path: 'BBBBBB',
             family: 'BBBBBB',
             phoneNumber: 'BBBBBB',
             address: 'BBBBBB',

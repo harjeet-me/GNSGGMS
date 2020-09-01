@@ -39,17 +39,17 @@
     <div class="table-responsive" id="entities" *ngIf="pRouls && pRouls.length > 0">
         <table class="table table-striped" aria-describedby="page-heading">
             <thead>
-                <tr>
-                    <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
-                    <th scope="col" ><span jhiTranslate="gnsggmsApp.pRoul.name">Name</span></th>
-                    <th scope="col" ><span jhiTranslate="gnsggmsApp.pRoul.desc">Desc</span></th>
-                    <th scope="col" ><span jhiTranslate="gnsggmsApp.pRoul.totalRoul">Total Roul</span></th>
-                    <th scope="col" ><span jhiTranslate="gnsggmsApp.pRoul.createdDate">Created Date</span></th>
-                    <th scope="col" ><span jhiTranslate="gnsggmsApp.pRoul.createdBy">Created By</span></th>
-                    <th scope="col" ><span jhiTranslate="gnsggmsApp.pRoul.lastModifiedDate">Last Modified Date</span></th>
-                    <th scope="col" ><span jhiTranslate="gnsggmsApp.pRoul.lastModifiedBy">Last Modified By</span></th>
-                    <th scope="col" ><span jhiTranslate="gnsggmsApp.pRoul.pathi">Pathi</span></th>
-                    <th scope="col" ><span jhiTranslate="gnsggmsApp.pRoul.sehajPath">Sehaj Path</span></th>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="name"><span jhiTranslate="gnsggmsApp.pRoul.name">Name</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="desc"><span jhiTranslate="gnsggmsApp.pRoul.desc">Desc</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="totalRoul"><span jhiTranslate="gnsggmsApp.pRoul.totalRoul">Total Roul</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="createdDate"><span jhiTranslate="gnsggmsApp.pRoul.createdDate">Created Date</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="createdBy"><span jhiTranslate="gnsggmsApp.pRoul.createdBy">Created By</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="lastModifiedDate"><span jhiTranslate="gnsggmsApp.pRoul.lastModifiedDate">Last Modified Date</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="lastModifiedBy"><span jhiTranslate="gnsggmsApp.pRoul.lastModifiedBy">Last Modified By</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="pathi.name"><span jhiTranslate="gnsggmsApp.pRoul.pathi">Pathi</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="sehajPath.desc"><span jhiTranslate="gnsggmsApp.pRoul.sehajPath">Sehaj Path</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -99,5 +99,15 @@
                 </tr>
             </tbody>
         </table>
+    </div>
+
+    <div *ngIf="pRouls && pRouls.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
     </div>
 </div>

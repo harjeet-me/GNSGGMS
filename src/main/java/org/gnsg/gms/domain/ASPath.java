@@ -12,6 +12,8 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.gnsg.gms.domain.enumeration.PATHTYPE;
+
 import org.gnsg.gms.domain.enumeration.EventStatus;
 
 /**
@@ -28,6 +30,10 @@ public class ASPath implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "path")
+    private PATHTYPE path;
 
     @Column(name = "family")
     private String family;
@@ -80,6 +86,19 @@ public class ASPath implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public PATHTYPE getPath() {
+        return path;
+    }
+
+    public ASPath path(PATHTYPE path) {
+        this.path = path;
+        return this;
+    }
+
+    public void setPath(PATHTYPE path) {
+        this.path = path;
     }
 
     public String getFamily() {
@@ -298,6 +317,7 @@ public class ASPath implements Serializable {
     public String toString() {
         return "ASPath{" +
             "id=" + getId() +
+            ", path='" + getPath() + "'" +
             ", family='" + getFamily() + "'" +
             ", phoneNumber='" + getPhoneNumber() + "'" +
             ", address='" + getAddress() + "'" +

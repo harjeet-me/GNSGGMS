@@ -7,13 +7,12 @@ import org.gnsg.gms.repository.search.ASPathSearchRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
@@ -52,13 +51,14 @@ public class ASPathServiceImpl implements ASPathService {
     /**
      * Get all the aSPaths.
      *
+     * @param pageable the pagination information.
      * @return the list of entities.
      */
     @Override
     @Transactional(readOnly = true)
-    public List<ASPath> findAll() {
+    public Page<ASPath> findAll(Pageable pageable) {
         log.debug("Request to get all ASPaths");
-        return aSPathRepository.findAll();
+        return aSPathRepository.findAll(pageable);
     }
 
 
@@ -92,14 +92,12 @@ public class ASPathServiceImpl implements ASPathService {
      * Search for the aSPath corresponding to the query.
      *
      * @param query the query of the search.
+     * @param pageable the pagination information.
      * @return the list of entities.
      */
     @Override
     @Transactional(readOnly = true)
-    public List<ASPath> search(String query) {
-        log.debug("Request to search ASPaths for query {}", query);
-        return StreamSupport
-            .stream(aSPathSearchRepository.search(queryStringQuery(query)).spliterator(), false)
-        .collect(Collectors.toList());
-    }
+    public Page<ASPath> search(String query, Pageable pageable) {
+        log.debug("Request to search for a page of ASPaths for query {}", query);
+        return aSPathSearchRepository.search(queryStringQuery(query), pageable);    }
 }
