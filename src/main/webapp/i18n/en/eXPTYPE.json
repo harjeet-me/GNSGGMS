@@ -1,0 +1,10 @@
+{
+  "gnsggmsApp": {
+    "EXPTYPE": {
+      "null": "",
+      "INVOICE": "INVOICE",
+      "RECIEPT": "RECIEPT",
+      "VOUCHER": "VOUCHER"
+    }
+  }
+}

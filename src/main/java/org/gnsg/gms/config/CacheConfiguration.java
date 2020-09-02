@@ -54,6 +54,8 @@ public class CacheConfiguration {
             createCache(cm, org.gnsg.gms.domain.ASPath.class.getName());
             createCache(cm, org.gnsg.gms.domain.ASPath.class.getName() + ".pRouls");
             createCache(cm, org.gnsg.gms.domain.PRoul.class.getName());
+            createCache(cm, org.gnsg.gms.domain.Expense.class.getName());
+            createCache(cm, org.gnsg.gms.domain.Revenue.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

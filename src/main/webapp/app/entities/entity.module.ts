@@ -36,6 +36,15 @@ import { RouterModule } from '@angular/router';
         path: 'p-roul',
         loadChildren: () => import('./p-roul/p-roul.module').then(m => m.GnsggmsPRoulModule),
       },
+      ,
+      {
+        path: 'expense',
+        loadChildren: () => import('./expense/expense.module').then(m => m.GnsggmsExpenseModule),
+      },
+      {
+        path: 'revenue',
+        loadChildren: () => import('./revenue/revenue.module').then(m => m.GnsggmsRevenueModule),
+      },
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ]),
   ],
