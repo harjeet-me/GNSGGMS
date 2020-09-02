@@ -2,7 +2,7 @@
   "name": "ASPath",
   "fields": [
     {
-      "fieldName": "path",
+      "fieldName": "program",
       "fieldType": "PATHTYPE",
       "fieldValues": "AKHAND_PATH,SEHAJ_PATH"
     },

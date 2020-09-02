@@ -17,7 +17,7 @@
       "detail": {
         "title": "AS Path"
       },
-      "path": "Path",
+      "program": "Program",
       "family": "Family",
       "phoneNumber": "Phone Number",
       "address": "Address",

@@ -5,7 +5,7 @@ import { EventStatus } from 'app/shared/model/enumerations/event-status.model';
 
 export interface IASPath {
   id?: number;
-  path?: PATHTYPE;
+  program?: PATHTYPE;
   family?: string;
   phoneNumber?: string;
   address?: string;
@@ -25,7 +25,7 @@ export interface IASPath {
 export class ASPath implements IASPath {
   constructor(
     public id?: number,
-    public path?: PATHTYPE,
+    public program?: PATHTYPE,
     public family?: string,
     public phoneNumber?: string,
     public address?: string,
