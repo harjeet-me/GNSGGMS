@@ -32,8 +32,8 @@ public class ASPath implements Serializable {
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "path")
-    private PATHTYPE path;
+    @Column(name = "program")
+    private PATHTYPE program;
 
     @Column(name = "family")
     private String family;
@@ -88,17 +88,17 @@ public class ASPath implements Serializable {
         this.id = id;
     }
 
-    public PATHTYPE getPath() {
-        return path;
+    public PATHTYPE getProgram() {
+        return program;
     }
 
-    public ASPath path(PATHTYPE path) {
-        this.path = path;
+    public ASPath program(PATHTYPE program) {
+        this.program = program;
         return this;
     }
 
-    public void setPath(PATHTYPE path) {
-        this.path = path;
+    public void setProgram(PATHTYPE program) {
+        this.program = program;
     }
 
     public String getFamily() {
@@ -317,7 +317,7 @@ public class ASPath implements Serializable {
     public String toString() {
         return "ASPath{" +
             "id=" + getId() +
-            ", path='" + getPath() + "'" +
+            ", program='" + getProgram() + "'" +
             ", family='" + getFamily() + "'" +
             ", phoneNumber='" + getPhoneNumber() + "'" +
             ", address='" + getAddress() + "'" +

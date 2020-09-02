@@ -29,7 +29,7 @@ enum PATHTYPE{
    AKHAND_PATH , SEHAJ_PATH 
 }
 entity ASPath {
-    path PATHTYPE ,
+    program PATHTYPE ,
 	family String,
     phoneNumber String,
     address String ,

@@ -41,7 +41,7 @@
             <thead>
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
                     <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="path"><span jhiTranslate="gnsggmsApp.aSPath.path">Path</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="program"><span jhiTranslate="gnsggmsApp.aSPath.program">Program</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="family"><span jhiTranslate="gnsggmsApp.aSPath.family">Family</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="phoneNumber"><span jhiTranslate="gnsggmsApp.aSPath.phoneNumber">Phone Number</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="address"><span jhiTranslate="gnsggmsApp.aSPath.address">Address</span> <fa-icon icon="sort"></fa-icon></th>
@@ -61,7 +61,7 @@
             <tbody>
                 <tr *ngFor="let aSPath of aSPaths ;trackBy: trackId">
                     <td><a [routerLink]="['/as-path', aSPath.id, 'view']">{{ aSPath.id }}</a></td>
-                    <td jhiTranslate="{{ 'gnsggmsApp.PATHTYPE.' + aSPath.path }}">{{ aSPath.path }}</td>
+                    <td jhiTranslate="{{ 'gnsggmsApp.PATHTYPE.' + aSPath.program }}">{{ aSPath.program }}</td>
                     <td>{{ aSPath.family }}</td>
                     <td>{{ aSPath.phoneNumber }}</td>
                     <td>{{ aSPath.address }}</td>

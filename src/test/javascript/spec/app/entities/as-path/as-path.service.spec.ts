@@ -99,7 +99,7 @@ describe('Service Tests', () => {
       it('should update a ASPath', () => {
         const returnedFromService = Object.assign(
           {
-            path: 'BBBBBB',
+            program: 'BBBBBB',
             family: 'BBBBBB',
             phoneNumber: 'BBBBBB',
             address: 'BBBBBB',
@@ -138,7 +138,7 @@ describe('Service Tests', () => {
       it('should return a list of ASPath', () => {
         const returnedFromService = Object.assign(
           {
-            path: 'BBBBBB',
+            program: 'BBBBBB',
             family: 'BBBBBB',
             phoneNumber: 'BBBBBB',
             address: 'BBBBBB',
