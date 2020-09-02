@@ -46,7 +46,33 @@ entity ASPath {
 
     
 }
+enum EXPTYPE{
+INVOICE , RECIEPT , VOUCHER
+}
 
+enum REVTYPE{
+PROGRAM , GOLAK , SEHAJ_PATH_BHETA
+}
+entity Expense {
+    expType  EXPTYPE ,
+	amt Double ,
+    date LocalDate ,
+    desc String ,
+    createdDate Instant ,
+    createdBy String ,
+    lastModifiedDate Instant ,
+    lastModifiedBy String 
+}
+entity Revenue {
+    revType  REVTYPE ,
+	amt Double ,
+    date LocalDate ,
+    desc String ,
+    createdDate Instant ,
+    createdBy String ,
+    lastModifiedDate Instant ,
+    lastModifiedBy String 
+}
 enum EventStatus{
    BOOKED , COMPLETED , CANCELLED , REQUESTED , PAID
 }
