@@ -93,6 +93,18 @@
                             <span jhiTranslate="global.menu.entities.pRoul">P Roul</span>
                         </a>
                     </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="expense" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.expense">Expense</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="revenue" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.revenue">Revenue</span>
+                        </a>
+                    </li>
                     <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
                 </ul>
             </li>

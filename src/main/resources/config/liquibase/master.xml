@@ -22,6 +22,8 @@
     <include file="config/liquibase/changelog/20200408222700_added_entity_AppliedCharge.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200901210633_added_entity_ASPath.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200901210933_added_entity_PRoul.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200902031308_added_entity_Expense.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200902031408_added_entity_Revenue.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20200408215900_added_entity_constraints_Sevadar.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200408222500_added_entity_constraints_Student.xml" relativeToChangelogFile="false"/>
